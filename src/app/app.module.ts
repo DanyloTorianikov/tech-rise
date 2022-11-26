@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IconsRegistrarService } from '@services/icons-registrar.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -12,9 +14,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatIconModule,
   ],
-  providers: [],
+  providers: [
+    IconsRegistrarService,
+    { provide: APP_INITIALIZER, useFactory: initializeAppSteps, deps: [IconsRegistrarService], multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+function initializeAppSteps(iconsRegistrarService: IconsRegistrarService) {
+  return (): Promise<void> => iconsRegistrarService.registerIcons();
+}

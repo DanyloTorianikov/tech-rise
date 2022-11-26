@@ -1,9 +1,11 @@
+@import "colors";
+
 html,
 body {
   height: 100%;
 }
 
 body {
+	background-color: var(--background-color);
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
