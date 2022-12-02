@@ -1,0 +1,6 @@
+<div class="label" *ngIf="label">{{ label }}<span *ngIf="isRequired" class="is-required">*</span></div>
+<mat-form-field [class.error]="isError" appearance="outline">
+  <mat-icon matSuffix *ngIf="!!icon" [svgIcon]="icon"></mat-icon>
+  <input [mask]="mask" [dropSpecialCharacters]="false" [disabled]="!!disabled" [placeholder]="placeholder"
+    [ngModel]="value" (ngModelChange)="onChange($event.trim())" matInput type="text" />
+</mat-form-field>

@@ -1,0 +1,11 @@
+<div class="label" *ngIf="label">{{ label }}<span *ngIf="isRequired" class="is-required">*</span></div>
+<mat-form-field [class.error]="isError" appearance="outline">
+  <mat-icon matSuffix [svgIcon]="'arrow-down'"></mat-icon>
+  <input [disabled]="!!disabled" [matAutocomplete]="auto" [placeholder]="placeholder" [(ngModel)]="value" matInput
+    type="text">
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+    <mat-option *ngFor="let option of options" [value]="option">
+      {{ option }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

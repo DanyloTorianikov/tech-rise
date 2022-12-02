@@ -5,7 +5,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 const SVG_ICONS_PATH = 'assets/images/icons/';
 
 const SVG_ICONS = [
-  { name: 'logo', path: SVG_ICONS_PATH + 'logo.svg' }
+  { name: 'logo', path: SVG_ICONS_PATH + 'logo.svg' },
+  { name: 'arrow-down', path: SVG_ICONS_PATH + 'arrow-down.svg' },
 ];
 
 @Injectable()

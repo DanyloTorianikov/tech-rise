@@ -1,0 +1,6 @@
+<div class="label" *ngIf="label">{{ label }}<span *ngIf="isRequired" class="is-required">*</span></div>
+<mat-form-field [class.error]="isError" appearance="outline">
+  <mat-select [compareWith]="compareObjects" [disabled]="!!disabled" [(ngModel)]="value">
+    <mat-option [value]="option" *ngFor="let option of options">{{ option.label }}</mat-option>
+  </mat-select>
+</mat-form-field>
