@@ -1,0 +1,66 @@
+<div class="header-logo">
+  <mat-icon svgIcon="logo"></mat-icon>
+</div>
+
+<div class="header-menu">
+  <ng-container *ngTemplateOutlet="menu"></ng-container>
+</div>
+
+<div class="header-menu-mobile">
+  <mat-icon svgIcon="hamburger-menu" (click)="toggleMobileMenu()"></mat-icon>
+</div>
+
+<div class="header-menu right-menu" *ngIf="isShowMobileMenu">
+  <mat-icon class="close-btn" svgIcon="close" *ngIf="isShowMobileMenu" (click)="toggleMobileMenu()"></mat-icon>
+  <ng-container *ngTemplateOutlet="menu"></ng-container>
+</div>
+
+<ng-template #menu>
+  <div class="menu-link">
+    <span>About Us</span>
+    <span>Pricing</span>
+  </div>
+
+  <div class="user-info" *ngIf="isLogin; else loginBtn">
+    <div class="user">
+      <div *ngIf="!userPhoto" class="empty-user">
+        <mat-icon svgIcon="empty-user"></mat-icon>
+      </div>
+      <img *ngIf="userPhoto" [src]="userPhoto" class="profile-picture" alt="user-avatar">
+      <span class="user-name">Jon</span>
+      <mat-icon *ngIf="!isShowMobileMenu" class="menu-icon" svgIcon="arrow-down" [matMenuTriggerFor]="menu">
+      </mat-icon>
+    </div>
+
+    <mat-menu #menu="matMenu" xPosition="before" class="desktop-menu">
+      <ng-container *ngTemplateOutlet="navigateBtn"></ng-container>
+    </mat-menu>
+
+    <div class="navigate-btn" *ngIf="isShowMobileMenu">
+      <ng-container *ngTemplateOutlet="navigateBtn"></ng-container>
+    </div>
+  </div>
+
+  <div class="header-search">
+    <mat-icon svgIcon="search" class="search-icon"></mat-icon>
+  </div>
+</ng-template>
+
+<ng-template #navigateBtn>
+  <button mat-menu-item [routerLink]="['/profile']">
+    Profile
+  </button>
+  <button mat-menu-item [routerLink]="['/profile/edit']">
+    Edit profile
+  </button>
+  <button mat-menu-item (click)="onLogout()">
+    Logout
+  </button>
+</ng-template>
+
+<ng-template #loginBtn>
+  <div class="menu-button">
+    <app-button [text]="'Sign In'" [btnSize]="btnSize" [btnColor]="btnColor"></app-button>
+    <app-button [text]="'Registration'" [btnSize]="btnSize" [btnColor]="btnColor"></app-button>
+  </div>
+</ng-template>
