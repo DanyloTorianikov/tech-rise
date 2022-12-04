@@ -5,10 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { ButtonComponent } from './button/button.component';
+import { TitleComponent } from './title/title.component';
 
 @NgModule({
   declarations: [
     ButtonComponent,
+    TitleComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,7 @@ import { ButtonComponent } from './button/button.component';
   exports: [
     ButtonComponent,
     MatIconModule,
+    TitleComponent
   ]
 })
 export class SharedModule { }
