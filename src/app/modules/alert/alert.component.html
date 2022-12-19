@@ -1,0 +1,6 @@
+<div *ngFor="let alert of alerts; let i = index" @fade>
+  <app-alert-item
+    [alert]="alert"
+    (onClose)="removeAlert(alert)">
+  </app-alert-item>
+</div>
