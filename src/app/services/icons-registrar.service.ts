@@ -11,6 +11,9 @@ const SVG_ICONS = [
   { name: 'hamburger-menu', path: SVG_ICONS_PATH + 'hamburger-menu.svg' },
   { name: 'empty-user', path: SVG_ICONS_PATH + 'empty-user.svg' },
   { name: 'search', path: SVG_ICONS_PATH + 'search.svg' },
+  { name: 'warning', path: SVG_ICONS_PATH + 'warning.svg' },
+  { name: 'check', path: SVG_ICONS_PATH + 'check.svg' },
+  { name: 'close-white', path: SVG_ICONS_PATH + 'close-white.svg' },
 ];
 
 @Injectable()

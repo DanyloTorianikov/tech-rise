@@ -1,0 +1,9 @@
+<div class="alert-wrapper {{ alert.type }}" (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
+  <div class="info-block">
+    <div class="message">
+      <mat-icon class="input-icon" [svgIcon]="icon"></mat-icon>
+      <div class="text">{{ alert.message }}</div>
+    </div>
+    <mat-icon class="alert-close" (click)="close()" svgIcon="close-white"></mat-icon>
+  </div>
+</div>

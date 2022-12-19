@@ -1,0 +1,23 @@
+@import 'media-variables';
+@import 'mixins';
+
+:host {
+  @include flex($direction: column);
+  position: fixed;
+  width: calc(100% - 48px);
+  max-width: 370px;
+  top: 82px;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 9999;
+
+  @media (max-width: $mediaWidthSM) {
+    width: 100vw;
+    max-width: 100%;
+    top: 0;
+
+    div {
+      width: 100%;
+    }
+  }
+}
