@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EMAIL_PATTERN } from '@constants/email-pattern.constant';
 import { AuthService } from '@services/auth.service';
+import { UserService } from '@services/user.service';
 import { EButtonColor, EButtonSize } from '@shared/button/enums/button.enum';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService, 
+    private userService: UserService
   ) { }
 
   public ngOnInit(): void {
