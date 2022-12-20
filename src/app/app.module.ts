@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertModule } from '@modules/alert/alert.module';
 import { HeaderModule } from '@modules/header/header.module';
 import { IconsRegistrarService } from '@services/icons-registrar.service';
+import { InterceptorModule } from './interceptors/interceptor.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -18,7 +19,8 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     HttpClientModule,
     HeaderModule,
-    AlertModule
+    AlertModule,
+    InterceptorModule,
   ],
   providers: [
     IconsRegistrarService,

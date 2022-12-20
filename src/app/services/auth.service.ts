@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { filter, map, Observable, tap } from 'rxjs';
 import { ILoginUser, IUser } from 'src/app/interfaces/user.interface';
 import { UserService } from './user.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { IAuthResponse } from '@interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +26,17 @@ export class AuthService {
       } else {
         formData.append(key, value);
       }
-    })
-    return this.httpClient.post(`${this.apiUrl}auth/registration`, formData);
+    });
+
+    return this.httpClient.post(`${this.apiUrl}auth/registration`, formData).pipe(
+      tap((res: any) => localStorage.setItem('token', res.token)),
+    );
   }
 
-  public login(user: ILoginUser) {
-    return this.httpClient.post(`${this.apiUrl}auth/login`, user);
+  public login(user: ILoginUser): Observable<IAuthResponse> {
+    return this.httpClient.post<Observable<IAuthResponse>>(`${this.apiUrl}auth/login`, user).pipe(
+      tap((res: any) => localStorage.setItem('token', res.token)),
+    );
   }
 
   public logout(): void {
