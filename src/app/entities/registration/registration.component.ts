@@ -25,8 +25,7 @@ export class RegistrationComponent implements OnDestroy {
   }
 
   public save(user: IUser): void {
-    console.log(user)
-    this.authService.login(user).pipe(
+    this.authService.registration(user).pipe(
       takeUntil(this.destroy$)
     ).subscribe((result) => {
       console.log(result);

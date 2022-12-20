@@ -47,6 +47,7 @@
 }
 
 @mixin userAvatar($blockSize: 40px, $iconSize: 22px, $withBorder: false, $lgBlockSize: false, $lgIconSize: false) {
+
   .profile-picture,
   .empty-user {
     display: block;
@@ -81,6 +82,39 @@
           height: $lgIconSize;
         }
       }
+    }
+  }
+}
+
+@mixin formContainer {
+  padding: 0 7%;
+  position: relative;
+
+  .wrapper {
+    @include flex($justify: flex-start, $align: flex-start);
+    gap: 90px;
+    background-color: var(--white);
+    padding: 50px 50px 50px 52px;
+    margin: -40px auto 0;
+
+    @media (max-width: $mediaWidthSM) {
+      margin: -134px auto 0;
+    }
+
+    @media (max-width: $mediaWidthLG) {
+      flex-direction: column;
+      padding: 24px 20px 40px;
+      gap: 20px;
+    }
+
+    form {
+      width: 100%;
+    }
+
+    .actions {
+      padding-top: 12px;
+      width: 100%;
+      max-width: 150px;
     }
   }
 }

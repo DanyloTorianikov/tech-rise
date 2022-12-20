@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUser } from 'src/app/interfaces/user.interface';
+import { ILoginUser, IUser } from 'src/app/interfaces/user.interface';
 import { UserService } from './user.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -16,7 +16,7 @@ export class AuthService {
     private httpClient: HttpClient
   ) { }
 
-  public login(user: IUser): Observable<any> {
+  public registration(user: IUser): Observable<any> {
     const formData = new FormData();
     Object.entries(user).forEach(([key, value]) => {
       if (key === 'avatar') {
@@ -27,6 +27,10 @@ export class AuthService {
       }
     })
     return this.httpClient.post(`${this.apiUrl}auth/registration`, formData);
+  }
+
+  public login(user: ILoginUser) {
+    return this.httpClient.post(`${this.apiUrl}auth/login`, user);
   }
 
   public logout(): void {
