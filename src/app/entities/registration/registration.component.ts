@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { filter, map, Subject, switchMap, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { IBreadcrumb } from '@shared/title/interfaces/breadcrumb.interface';
 import { AuthService } from '@services/auth.service';
 import { IUser } from 'src/app/interfaces/user.interface';
@@ -19,7 +17,6 @@ export class RegistrationComponent implements OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private router: Router
   ) { }
 
   public ngOnDestroy(): void {

@@ -61,7 +61,7 @@ export class ProfileInfoComponent implements OnInit, OnDestroy {
   }
 
   public setUserPhoto(photo: string): void {
-    this.userForm.get('userPhoto')?.setValue(photo);
+    this.userForm.get('avatar')?.setValue(photo);
   }
 
   public save(): void {
