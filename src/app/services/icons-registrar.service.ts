@@ -14,6 +14,8 @@ const SVG_ICONS = [
   { name: 'warning', path: SVG_ICONS_PATH + 'warning.svg' },
   { name: 'check', path: SVG_ICONS_PATH + 'check.svg' },
   { name: 'close-white', path: SVG_ICONS_PATH + 'close-white.svg' },
+  { name: 'delete', path: SVG_ICONS_PATH + 'delete.svg' },
+
 ];
 
 @Injectable()
