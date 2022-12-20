@@ -97,12 +97,12 @@ export class ProfileInfoComponent implements OnInit, OnDestroy {
     this.userForm = this.formBuilder.group({
       userName: ['', [Validators.required]],
       email: ['', [EMAIL_PATTERN, Validators.required]],
+      password: ['', [Validators.required]],
       codeCountry: [{label: '🇺🇸', value: '+1'}],
       phone: ['', [Validators.required, Validators.minLength(9)]],
-      birthDate: ['', [Validators.required]],
+      birthday: ['', [Validators.required]],
       country: ['', [Validators.required]],
-      webSite: [''],
-      userPhoto: ['']
+      avatar: ['']
     });
 
     if (this.user) {

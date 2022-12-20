@@ -1,13 +1,8 @@
 @import 'media-variables';
+@import 'mixins';
 
 button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  transition: all .1s ease-in-out;
-  white-space: nowrap;
-  cursor: pointer;
+  @include defaultButton; 
 
   &.dark-gray {
     background-color: var(--dark-gray);
@@ -25,18 +20,7 @@ button {
   }
 
   &.light-gray {
-    background-color: var(--light-gray);
-    color: var(--dark-gray);
-    -webkit-text-fill-color: var(--dark-gray);
-    border: 1px solid var(--light-gray-90);
-
-    &:hover:not([disabled]) {
-      background-color: var(--light-gray-90);
-    }
-
-    &:active:not([disabled]) {
-      background-color: var(--light-gray-80);
-    }
+    @include lightGrayButton;
   }
 
   &.blue {
@@ -71,17 +55,7 @@ button {
   }
 
   &.big {
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 23px;
-    padding: 0 32px;
-    height: 50px;
-
-    @media (max-width: $mediaWidthLG) {
-      flex-direction: column;
-      height: 40px;
-      font-size: 14px;
-    }
+    @include bigButton;
   }
 
   &.medium {

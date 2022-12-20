@@ -5,8 +5,8 @@ export interface IUser {
   email: string;
   codeCountry: ISelect;
   phone: string;
-  birthDate: Date;
+  birthday: Date;
   country: string;
-  webSite: string;
-  userPhoto: string;
+  avatar: string;
+  password?: string;
 }
