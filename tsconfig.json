@@ -8,7 +8,8 @@
       "@services/*": ["src/app/services/*"],
       "@modules/*": ["src/app/modules/*"],
       "@interfaces/*": ["src/app/interfaces/*"],
-      "@constants/*": ["src/app/constants/*"]
+      "@constants/*": ["src/app/constants/*"],
+      "@entities/*": ["src/app/entities/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
