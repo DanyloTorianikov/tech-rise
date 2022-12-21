@@ -11,5 +11,5 @@ export interface IUser extends ILoginUser {
 
 export interface ILoginUser {
   email: string;
-  password: string;
+  password?: string;
 }

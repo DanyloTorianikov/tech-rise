@@ -1,0 +1,73 @@
+@import 'mixins';
+@import 'media-variables';
+
+.container {
+  @include flex($justify: space-between, $align: flex-start);
+  gap: 30px;
+  padding: 0 7%;
+  position: relative;
+
+  .wrapper {
+    @include userAvatar(200px, 132px);
+    background-color: var(--white);
+    margin: -96px auto 0;
+
+    .user-name {
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 41px;
+      color: var(--darkGray);
+      white-space: nowrap;
+      padding: 24px 0 11px 0;
+    }
+
+    &-photo {
+      @include flex($direction: column);
+      padding: 28px 42px 34px;
+      min-width: 334px;
+      box-sizing: border-box;
+
+      @media (max-width: $mediaWidthLG) {
+        display: none;
+      }
+    }
+
+    &-info {
+      padding: 20px 30px 45px;
+      width: 100%;
+      box-sizing: border-box;
+
+      .user-photo {
+        display: none;
+
+        @media (max-width: $mediaWidthLG) {
+          @include flex($direction: column);
+          margin-top: -120px;
+        }
+      }
+
+      .header {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 25px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--light-gray-90);
+      }
+
+      .user-info {
+        @include flex($justify: flex-start);
+        flex-wrap: wrap;
+        margin-top: -10px;
+
+        app-user-data {
+          width: 50%;
+          padding-top: 45px;
+
+          @media (max-width: $mediaWidthLG) {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
