@@ -12,6 +12,14 @@
     background-color: var(--white);
     margin: -96px auto 0;
 
+    @media (max-width: $mediaWidthLG) {
+      margin: -20px auto 0;
+    }
+
+    @media (max-width: $mediaWidthSM) {
+      margin: -96px auto 0;
+    }
+
     .user-name {
       font-weight: 700;
       font-size: 30px;
