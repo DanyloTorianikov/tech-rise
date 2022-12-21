@@ -9,6 +9,7 @@ import { IBreadcrumb } from '@shared/title/interfaces/breadcrumb.interface';
 import { EMAIL_PATTERN } from '@constants/email-pattern.constant';
 import { ICountry } from '@interfaces/country.interface';
 import { IUser } from '@interfaces/user.interface';
+import { PASSWORD_PATTERN } from '@constants/password-pattern.constant';
 
 @Component({
   selector: 'app-profile-info',
@@ -97,7 +98,7 @@ export class ProfileInfoComponent implements OnInit, OnDestroy {
     this.userForm = this.formBuilder.group({
       userName: ['', [Validators.required]],
       email: ['', [EMAIL_PATTERN, Validators.required]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, PASSWORD_PATTERN]],
       codeCountry: [{label: '🇺🇸', value: '+1'}],
       phone: ['', [Validators.required, Validators.minLength(9)]],
       birthday: ['', [Validators.required]],
