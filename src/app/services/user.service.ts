@@ -9,13 +9,19 @@ import { IUser } from '../interfaces/user.interface';
   providedIn: 'root'
 })
 export class UserService {
-  public currentUser$: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(null); 
+  public currentUser$: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(null);
+  private apiUrl: string = environment.apiUrl;
+
   constructor(private http: HttpClient) {
     this.currentUser$.next(JSON.parse(localStorage.getItem('user')!));
   }
 
   public getCountry(): Observable<ICountry[]> {
     return this.http.get<ICountry[]>(environment.flagsUrl);
+  }
+
+  public getCurrentUser(): Observable<IUser> {
+    return this.http.get(`${this.apiUrl}users/me`) as Observable<IUser>;
   }
 
   public saveUser(user: IUser): void {

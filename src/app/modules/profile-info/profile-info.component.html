@@ -10,7 +10,7 @@
       <app-input (click)="!!user && showError()" [icon]="!!user ? 'lock' : ''" [disabled]="!!user"
         [isError]="!!(userForm.get('email')?.invalid && userForm.get('email')?.dirty)" formControlName="email"
         [isRequired]="true" [label]="'Email'" [placeholder]="'Eg: johndoe@gmail.com'"></app-input>
-      <app-input [isRequired]="true" [isError]="!!(userForm.get('password')?.invalid && userForm.get('password')?.dirty)"
+      <app-input [isRequired]="true" [type]="'password'" [isError]="!!(userForm.get('password')?.invalid && userForm.get('password')?.dirty)"
         formControlName="password" [label]="'Password'" [placeholder]="'Password'"></app-input>
       <div class="phone-number">
         <app-select (click)="!!user && showError()" [disabled]="!!user" [isRequired]="true"

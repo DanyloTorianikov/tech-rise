@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 const noop = () => { };
 
@@ -15,10 +15,11 @@ const noop = () => { };
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputComponent implements ControlValueAccessor {
+export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() public placeholder!: string;
   @Input() public isError!: boolean;
   @Input() public errorMessage!: string;
+  @Input() public type: 'text' | 'password' = 'text';
   @Input() public mask?: string;
   @Input() public disabled?: boolean;
   @Input() public label?: string;
@@ -29,10 +30,22 @@ export class InputComponent implements ControlValueAccessor {
     this.onChange(this._value);
   }
 
+  public hide: boolean = true;
+  public _type!: 'text' | 'password'
+
   private _value!: string;
 
   public get value(): string {
     return this._value;
+  }
+
+  public ngOnInit(): void {
+    this._type = this.type;
+  }
+
+  public onHide(): void {
+    this.hide = !this.hide;
+    this._type = this.hide ? 'password' : 'text';
   }
 
   public registerOnTouched: () => void = noop;
