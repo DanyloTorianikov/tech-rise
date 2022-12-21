@@ -42,8 +42,7 @@ button {
     background-color: var(--light-blue);
     color: var(--white);
     -webkit-text-fill-color: var(--white);
-    border: 1px solid var(--white);
-
+    border: none;
 
     &:hover:not([disabled]) {
       background-color: var(--light-blue-90);
