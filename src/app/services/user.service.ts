@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ICountry } from '../interfaces/country.interface';
 import { IUser } from '../interfaces/user.interface';
@@ -21,7 +21,12 @@ export class UserService {
   }
 
   public getCurrentUser(): Observable<IUser> {
-    return this.http.get(`${this.apiUrl}users/me`) as Observable<IUser>;
+    return this.http.get<IUser>(`${this.apiUrl}users/me`).pipe(
+      tap((user: IUser) => {
+        localStorage.setItem('user', JSON.stringify(user));
+        this.currentUser$.next(user)
+      })
+    );
   }
 
   public saveUser(user: IUser): void {
@@ -35,6 +40,7 @@ export class UserService {
   }
 
   public removeUser(): void {
+    localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.currentUser$.next(null);
   }

@@ -21,13 +21,13 @@
     <span>Pricing</span>
   </div>
 
-  <div class="user-info" *ngIf="isLogin; else loginBtn">
+  <div class="user-info" *ngIf="(user$ | async) as user; else loginBtn">
     <div class="user">
-      <div *ngIf="!userPhoto" class="empty-user">
+      <div *ngIf="!user.avatar" class="empty-user">
         <mat-icon svgIcon="empty-user"></mat-icon>
       </div>
-      <img *ngIf="userPhoto" [src]="userPhoto" class="profile-picture" alt="user-avatar">
-      <span class="user-name">Jon</span>
+      <img *ngIf="user.avatar" [src]="user.avatar" class="profile-picture" alt="user-avatar">
+      <span class="user-name">{{ user.userName }}</span>
       <mat-icon *ngIf="!isShowMobileMenu" class="menu-icon" svgIcon="arrow-down" [matMenuTriggerFor]="menu">
       </mat-icon>
     </div>
@@ -60,7 +60,8 @@
 
 <ng-template #loginBtn>
   <div class="menu-button">
-    <app-button [text]="'Sign In'" [btnSize]="btnSize" [btnColor]="btnColor"></app-button>
-    <app-button [text]="'Registration'" [btnSize]="btnSize" [btnColor]="btnColor"></app-button>
+    <app-button [text]="'Sign In'" [routerLink]="['/login']" [btnSize]="btnSize" [btnColor]="btnColor"></app-button>
+    <app-button [text]="'Registration'" [routerLink]="['/registration']" [btnSize]="btnSize" [btnColor]="btnColor">
+    </app-button>
   </div>
 </ng-template>

@@ -6,6 +6,7 @@ import { PASSWORD_PATTERN } from '@constants/password-pattern.constant';
 import { AuthService } from '@services/auth.service';
 import { UserService } from '@services/user.service';
 import { EButtonColor, EButtonSize } from '@shared/button/enums/button.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private router: Router
   ) { }
 
   public ngOnInit(): void {
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
       takeUntil(this.destroy$)
     ).subscribe((result) => {
       console.log(result);
+      this.router.navigate(['profile']);
     })
   }
 

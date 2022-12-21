@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { filter, map, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ILoginUser, IUser } from 'src/app/interfaces/user.interface';
 import { UserService } from './user.service';
 import { environment } from 'src/environments/environment';
@@ -17,25 +17,28 @@ export class AuthService {
     private httpClient: HttpClient
   ) { }
 
-  public registration(user: IUser): Observable<any> {
+  public registration(user: IUser): Observable<IAuthResponse> {
     const formData = new FormData();
     Object.entries(user).forEach(([key, value]) => {
       if (key === 'avatar') {
         const image = value ? this.base64ToFile(value) : '';
         formData.append(key, image);
+      } else if (key === 'codeCountry') {
+        formData.append(`${key}[label]`, value.label);
+        formData.append(`${key}[value]`, value.value);
       } else {
         formData.append(key, value);
       }
     });
 
-    return this.httpClient.post(`${this.apiUrl}auth/registration`, formData).pipe(
-      tap((res: any) => localStorage.setItem('token', res.token)),
+    return this.httpClient.post<IAuthResponse>(`${this.apiUrl}auth/registration`, formData).pipe(
+      tap(({ token }: IAuthResponse) => localStorage.setItem('token', token)),
     );
   }
 
   public login(user: ILoginUser): Observable<IAuthResponse> {
-    return this.httpClient.post<Observable<IAuthResponse>>(`${this.apiUrl}auth/login`, user).pipe(
-      tap((res: any) => localStorage.setItem('token', res.token)),
+    return this.httpClient.post<IAuthResponse>(`${this.apiUrl}auth/login`, user).pipe(
+      tap(({ token }: IAuthResponse) => localStorage.setItem('token', token)),
     );
   }
 

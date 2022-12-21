@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { IUser } from '@interfaces/user.interface';
+import { AuthService } from '@services/auth.service';
+import { UserService } from '@services/user.service';
 import { EButtonColor, EButtonSize } from '@shared/button/enums/button.enum';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
 	selector: 'app-header',
@@ -9,14 +13,15 @@ import { EButtonColor, EButtonSize } from '@shared/button/enums/button.enum';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-	public isLogin: boolean = true;
-	public userPhoto: string = '';
+	public user$: BehaviorSubject<IUser | null> = this.userService.currentUser$;
 	public isShowMobileMenu: boolean = false;
 	public btnSize: EButtonSize = EButtonSize.medium;
 	public btnColor: EButtonColor = EButtonColor.darkGray;
 
 	constructor(
-		private router: Router
+		private router: Router,
+		private userService: UserService,
+		private authService: AuthService
 	) { }
 
 	public toggleMobileMenu(): void {
@@ -24,6 +29,7 @@ export class HeaderComponent {
 	}
 
 	public onLogout(): void {
+		this.authService.logout();
 		this.router.navigateByUrl('/registration');
 	}
 }

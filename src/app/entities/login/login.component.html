@@ -7,7 +7,7 @@
         formControlName="email" [isRequired]="true" [label]="'Email'"
         [placeholder]="'Eg: johndoe@gmail.com'"></app-input>
       <app-input [isRequired]="true"
-        [isError]="!!(loginForm.get('password')?.invalid && loginForm.get('password')?.dirty)"
+        [type]="'password'" [isError]="!!(loginForm.get('password')?.invalid && loginForm.get('password')?.dirty)"
         formControlName="password" [label]="'Password'" [placeholder]="'Password'"></app-input>
       <app-button (click)="login()" [isFullWidth]="true" [text]="'Login'" [btnColor]="btnColor" [btnSize]="btnSize">
       </app-button>
