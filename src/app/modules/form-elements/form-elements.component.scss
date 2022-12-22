@@ -76,7 +76,7 @@
       border: 1px solid var(--dark-gray);
     }
 
-    &.mat-form-field-disabled .mdc-notched-outline {
+    &.mat-form-field-disabled .mat-mdc-text-field-wrapper {
       background-color: var(--gray-90);
     }
 
