@@ -4,6 +4,7 @@ import { IBreadcrumb } from '@shared/title/interfaces/breadcrumb.interface';
 import { AuthService } from '@services/auth.service';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { REGISTRATION_BREADCRUMBS } from './constants/registration.constant';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -17,6 +18,7 @@ export class RegistrationComponent implements OnDestroy {
 
   constructor(
     private authService: AuthService,
+    private router: Router,
   ) { }
 
   public ngOnDestroy(): void {
@@ -29,6 +31,7 @@ export class RegistrationComponent implements OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe((result) => {
       console.log(result);
+      this.router.navigate(['profile']);
     })
 
   }

@@ -7,9 +7,10 @@ export interface IUser extends ILoginUser {
   birthday: Date;
   country: string;
   avatar: string;
+  roles?: string[]
 }
 
 export interface ILoginUser {
   email: string;
-  password: string;
+  password?: string;
 }
