@@ -1,0 +1,1 @@
+export const DISPLAYED_COLUMNS = ['id', 'avatar', 'email', 'userName', 'birthday' , 'phone', 'country', 'roles', 'banned', 'banReason', 'actions'];

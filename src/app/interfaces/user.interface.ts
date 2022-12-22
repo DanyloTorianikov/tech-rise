@@ -14,3 +14,8 @@ export interface ILoginUser {
   email: string;
   password?: string;
 }
+
+export interface IFullUserInfo extends IUser {
+  banReason: boolean;
+  banned: boolean;
+}
