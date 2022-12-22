@@ -20,7 +20,8 @@ const SVG_ICONS = [
   { name: 'email', path: SVG_ICONS_PATH + 'email.svg' },
   { name: 'location', path: SVG_ICONS_PATH + 'location.svg' },
   { name: 'edit', path: SVG_ICONS_PATH + 'edit.svg' },
-  { name: 'calendar', path: SVG_ICONS_PATH + 'calendar.svg' },  
+  { name: 'calendar', path: SVG_ICONS_PATH + 'calendar.svg' },
+  { name: 'lock', path: SVG_ICONS_PATH + 'lock.svg' },  
 ];
 
 @Injectable()

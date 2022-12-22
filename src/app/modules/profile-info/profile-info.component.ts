@@ -107,6 +107,7 @@ export class ProfileInfoComponent implements OnInit, OnDestroy {
     });
 
     if (this.user) {
+      this.userForm.removeControl('password');
       this.userForm.patchValue(this.user);
     }
   }

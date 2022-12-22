@@ -23,12 +23,12 @@
 
     .value {
       box-sizing: border-box;
-      width: 100%;
       font-weight: 700;
       font-size: 18px;
       line-height: 25px;
       color: var(--dark-gray);
       padding-top: 2px;
+      word-break: break-all;
     }
   }
 }
