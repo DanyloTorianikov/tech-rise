@@ -1,0 +1,28 @@
+@import 'mixins';
+@import 'media-variables';
+
+:host {
+  width: 100%;
+
+  .user {
+    @include userAvatar;
+  }
+
+  .col-role {
+    div {
+      margin: 2px 0;
+    }
+  }
+
+  .col-xxl {
+    @media (max-width: $mediaWidthXXL) {
+      display: none;
+    }
+  }
+
+  .col-xl {
+    @media (max-width: $mediaWidthXL) {
+      display: none;
+    }
+  }
+}

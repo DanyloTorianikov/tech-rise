@@ -1,0 +1,112 @@
+<table [dataSource]="users" mat-table>
+  <ng-container matColumnDef="id">
+    <th *matHeaderCellDef mat-header-cell>
+      <span>ID</span>
+    </th>
+    <td *matCellDef="let element" mat-cell>
+      <span>{{ element.id }} </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="avatar">
+    <th *matHeaderCellDef mat-header-cell>
+      <span>Avatar</span>
+    </th>
+    <td *matCellDef="let element" mat-cell>
+      <div class="user">
+        <div *ngIf="!element.avatar" class="empty-user">
+          <mat-icon svgIcon="empty-user"></mat-icon>
+        </div>
+        <img *ngIf="element.avatar" [src]="element.avatar" class="profile-picture" alt="user-avatar">
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th *matHeaderCellDef mat-header-cell>
+      <span>Email</span>
+    </th>
+    <td *matCellDef="let element" mat-cell>
+      <span>{{ element.email }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="userName">
+    <th *matHeaderCellDef mat-header-cell>
+      <span>User Name</span>
+    </th>
+    <td *matCellDef="let element" class="desktopLG-cell" mat-cell>
+      <span>{{ element.userName }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="birthday">
+    <th class="col-xxl" *matHeaderCellDef mat-header-cell>
+      <span>Birthday</span>
+    </th>
+    <td class="col-xxl" *matCellDef="let element" mat-cell>
+      <span>{{ element.birthday | date: 'dd/MM/YYYY' }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="phone">
+    <th class="col-xl" *matHeaderCellDef mat-header-cell>
+      <span>Phone</span>
+    </th>
+    <td class="col-xl" *matCellDef="let element" mat-cell>
+      <span>{{ element.codeCountry.value + ' ' + element.phone }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="country">
+    <th class="col-xxl" *matHeaderCellDef mat-header-cell>
+      <span>Country</span>
+    </th>
+    <td class="col-xxl" *matCellDef="let element" mat-cell>
+      <span>{{ element.country }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="roles">
+    <th *matHeaderCellDef mat-header-cell>
+      <span>Roles</span>
+    </th>
+    <td class="col-role" *matCellDef="let element" mat-cell>
+      <div *ngFor="let role of element.roles">{{ role }}</div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="banned">
+    <th *matHeaderCellDef mat-header-cell>
+      <span>Banned</span>
+    </th>
+    <td *matCellDef="let element" mat-cell>
+      <span>{{ element.banned }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="banReason">
+    <th class="col-xl" *matHeaderCellDef mat-header-cell>
+      <span>Ban Reason</span>
+    </th>
+    <td class="col-xl" *matCellDef="let element" mat-cell>
+      <span>{{ element.banReason || '--' }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th *matHeaderCellDef mat-header-cell>
+      <span>Actions</span>
+    </th>
+    <td *matCellDef="let element" mat-cell>
+      <mat-icon svgIcon="ban"></mat-icon>
+      <mat-icon svgIcon="switch-roles"></mat-icon>
+    </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: displayedColumns" mat-row>
+  </tr>
+</table>
+
+<!-- <app-pagination (pageChange)="loadPage($event)" [config]="paginationConfig"></app-pagination> -->

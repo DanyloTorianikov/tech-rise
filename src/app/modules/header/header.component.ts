@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IUser } from '@interfaces/user.interface';
 import { AuthService } from '@services/auth.service';
@@ -12,8 +12,9 @@ import { BehaviorSubject } from 'rxjs';
 	styleUrls: ['header.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent {
-	public user$: BehaviorSubject<IUser | null> = this.userService.currentUser$;
+export class HeaderComponent implements OnInit {
+	public user!: IUser | null;
+	public userIsAdmin!: boolean;
 	public isShowMobileMenu: boolean = false;
 	public btnSize: EButtonSize = EButtonSize.medium;
 	public btnColor: EButtonColor = EButtonColor.darkGray;
@@ -24,6 +25,12 @@ export class HeaderComponent {
 		private authService: AuthService
 	) { }
 
+	public ngOnInit(): void {
+		this.userService.currentUser$.subscribe((user: IUser | null) => {
+			this.user = user;
+			this.userIsAdmin = this.user?.roles?.includes('ADMIN')!;
+		})
+	}
 	public toggleMobileMenu(): void {
 		this.isShowMobileMenu = !this.isShowMobileMenu;
 	}

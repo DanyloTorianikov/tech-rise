@@ -1,0 +1,7 @@
+<app-title [title]="'User List'"></app-title>
+
+<div class="container">
+  <div class="wrapper">
+    <app-user-table-desktop [users]="(users$ | async)!"></app-user-table-desktop>
+  </div>
+</div>

@@ -24,6 +24,11 @@ const routes: Routes = [
     loadChildren: () => import('./entities/user-profile/user-profile.module').then(m => m.UserProfileModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'user-list',
+    loadChildren: () => import('./entities/user-list/user-list.module').then(m => m.UserListModule),
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({

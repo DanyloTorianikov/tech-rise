@@ -41,6 +41,10 @@
     @include flex($justify: space-around);
     @include userAvatar;
 
+    .menu-item {
+      margin-right: 10px;
+    }
+
     .profile-picture,
     .empty-user {
       margin-right: 5px;

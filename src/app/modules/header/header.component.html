@@ -19,9 +19,10 @@
   <div class="menu-link">
     <span>About Us</span>
     <span>Pricing</span>
+    <span *ngIf="userIsAdmin" [routerLink]="['/user-list']">User List</span>
   </div>
 
-  <div class="user-info" *ngIf="(user$ | async) as user; else loginBtn">
+  <div class="user-info" *ngIf="user; else loginBtn">
     <div class="user">
       <div *ngIf="!user.avatar" class="empty-user">
         <mat-icon svgIcon="empty-user"></mat-icon>
