@@ -36,6 +36,11 @@ button {
     &:active:not([disabled]) {
       background-color: var(--blue-80);
     }
+
+    &:disabled  {
+      background-color: var(--dark-gray-80);
+
+    }
   }
 
   &.light-blue {

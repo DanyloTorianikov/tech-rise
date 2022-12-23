@@ -8,6 +8,18 @@
     @include userAvatar;
   }
 
+  .actions {
+    mat-icon {
+      cursor: pointer;
+      margin: 0 2px;
+
+      &.switch-roles {
+        width: 26px;
+        height: 26px;
+      }
+    }
+  }
+
   .col-role {
     div {
       margin: 2px 0;

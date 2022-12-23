@@ -6,18 +6,28 @@ import { UserListComponent } from './user-list.component';
 import { UserListRoutingModule } from './user-list-routing.module';
 import { UserTableMobileComponent } from './components/user-table-mobile/user-table-mobile.component';
 import { UserTableDesktopComponent } from './components/user-table-desktop/user-table-desktop.component';
+import { ChangeRolePopupComponent } from './popups/change-role-popup/change-role-popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BanUserPopupComponent } from './popups/ban-user-popup/ban-user-popup.component';
 
 @NgModule({
   declarations: [
     UserListComponent,
     UserTableMobileComponent,
     UserTableDesktopComponent,
+    ChangeRolePopupComponent,
+    BanUserPopupComponent,
   ],
   imports: [
     CommonModule,
     UserListRoutingModule,
     SharedModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    ReactiveFormsModule
   ]
 })
 export class UserListModule { }

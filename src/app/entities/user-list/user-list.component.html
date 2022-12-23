@@ -2,6 +2,6 @@
 
 <div class="container">
   <div class="wrapper">
-    <app-user-table-desktop [users]="(users$ | async)!"></app-user-table-desktop>
+    <app-user-table-desktop (onUpdateList)="updateList()" [users]="(users$ | async)!"></app-user-table-desktop>
   </div>
 </div>
