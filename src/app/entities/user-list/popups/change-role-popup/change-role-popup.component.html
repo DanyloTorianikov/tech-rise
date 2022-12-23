@@ -1,0 +1,15 @@
+<div class="header">
+  <span>Change Role</span>
+  <mat-icon svgIcon="close" (click)="close()"></mat-icon>
+</div>
+
+<div class="checkbox-group">
+  <mat-checkbox (change)="changeRole(role)" [checked]="rolesArray.value.includes(role.value)"
+    *ngFor="let role of data.rolesList; let i = index">
+    {{ role.description }}
+  </mat-checkbox>
+</div>
+
+<div class="actions">
+  <app-button (click)="update()" [disabledButton]="!rolesArray.value.length" [text]="'Update'" [btnColor]="btnColor"></app-button>
+</div>

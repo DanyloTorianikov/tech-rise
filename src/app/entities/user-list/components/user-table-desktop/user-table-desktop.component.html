@@ -98,9 +98,9 @@
     <th *matHeaderCellDef mat-header-cell>
       <span>Actions</span>
     </th>
-    <td *matCellDef="let element" mat-cell>
-      <mat-icon svgIcon="ban"></mat-icon>
-      <mat-icon svgIcon="switch-roles"></mat-icon>
+    <td *matCellDef="let element" class="actions" mat-cell>
+      <mat-icon svgIcon="ban" (click)="openBanUserPopup(element.id, element.banned)"></mat-icon>
+      <mat-icon class="switch-roles" (click)="openChangeRolePopup(element.id, element.roles)" svgIcon="switch-roles"></mat-icon>
     </td>
   </ng-container>
 
@@ -108,5 +108,3 @@
   <tr *matRowDef="let row; columns: displayedColumns" mat-row>
   </tr>
 </table>
-
-<!-- <app-pagination (pageChange)="loadPage($event)" [config]="paginationConfig"></app-pagination> -->
