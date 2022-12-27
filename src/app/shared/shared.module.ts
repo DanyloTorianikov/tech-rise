@@ -6,11 +6,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { ButtonComponent } from './button/button.component';
 import { TitleComponent } from './title/title.component';
+import { ShowForAdminDirective } from './directives/show-for-admin.directive';
 
 @NgModule({
   declarations: [
     ButtonComponent,
-    TitleComponent
+    TitleComponent,
+    ShowForAdminDirective
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { TitleComponent } from './title/title.component';
   exports: [
     ButtonComponent,
     MatIconModule,
-    TitleComponent
+    TitleComponent,
+    ShowForAdminDirective
   ]
 })
 export class SharedModule { }

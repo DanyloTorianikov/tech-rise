@@ -99,8 +99,10 @@
       <span>Actions</span>
     </th>
     <td *matCellDef="let element" class="actions" mat-cell>
-      <mat-icon svgIcon="ban" (click)="openBanUserPopup(element.id, element.banned)"></mat-icon>
-      <mat-icon class="switch-roles" (click)="openChangeRolePopup(element.id, element.roles)" svgIcon="switch-roles"></mat-icon>
+      <mat-icon appShowForAdmin [user]="element" [notShowForAdmin]="true" svgIcon="ban"
+        (click)="openBanUserPopup(element.id, element.banned)"></mat-icon>
+      <mat-icon appShowForAdmin [user]="currentUser!" [onlyForSuperAdmin]="true" class="switch-roles"
+        (click)="openChangeRolePopup(element.id, element.roles)" svgIcon="switch-roles"></mat-icon>
     </td>
   </ng-container>
 

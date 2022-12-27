@@ -19,7 +19,7 @@
   <div class="menu-link">
     <span>About Us</span>
     <span>Pricing</span>
-    <span *ngIf="userIsAdmin" [routerLink]="['/user-list']">User List</span>
+    <span appShowForAdmin [user]="user!" [routerLink]="['/user-list']">User List</span>
   </div>
 
   <div class="user-info" *ngIf="user; else loginBtn">
