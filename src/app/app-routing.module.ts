@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { RedirectGuard } from './guards/redirect.guard';
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
   {
@@ -27,7 +28,7 @@ const routes: Routes = [
   {
     path: 'user-list',
     loadChildren: () => import('./entities/user-list/user-list.module').then(m => m.UserListModule),
-    canActivate: [AuthGuard]
+    canActivate: [RoleGuard]
   },
 ];
 
@@ -37,7 +38,7 @@ const routes: Routes = [
     scrollPositionRestoration: 'enabled'
   })],
   exports: [RouterModule],
-  providers: [AuthGuard, RedirectGuard]
+  providers: [AuthGuard, RedirectGuard, RoleGuard]
 })
 export class AppRoutingModule {
 }
