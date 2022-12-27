@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { IFullUserInfo } from '@interfaces/user.interface';
+import { IFullUserInfo, IUser } from '@interfaces/user.interface';
 import { UserService } from '@services/user.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
@@ -11,9 +11,9 @@ import { Observable } from 'rxjs';
 })
 export class UserListComponent {
   public users$: Observable<IFullUserInfo[]> = this.userService.getAllUsers();
+  public currentUser$: BehaviorSubject<IUser | null> = this.userService.currentUser$;
 
   constructor(private userService: UserService) { }
-
 
   public updateList(): void {
     this.users$ = this.userService.getAllUsers();

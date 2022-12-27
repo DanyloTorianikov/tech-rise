@@ -4,7 +4,7 @@ import { IRole } from '@entities/user-list/interfaces/role.interface';
 import { BanUserPopupComponent } from '@entities/user-list/popups/ban-user-popup/ban-user-popup.component';
 import { ChangeRolePopupComponent } from '@entities/user-list/popups/change-role-popup/change-role-popup.component';
 import { RoleService } from '@entities/user-list/services/role.service';
-import { IFullUserInfo } from '@interfaces/user.interface';
+import { IFullUserInfo, IUser } from '@interfaces/user.interface';
 import { filter, Subject, switchMap, takeUntil } from 'rxjs';
 import { DISPLAYED_COLUMNS } from '../constants/user-table.constant';
 
@@ -16,6 +16,7 @@ import { DISPLAYED_COLUMNS } from '../constants/user-table.constant';
 })
 export class UserTableDesktopComponent implements OnDestroy {
   @Input() public users!: IFullUserInfo[];
+  @Input() public currentUser!: IUser | null;
   @Output() public onUpdateList: EventEmitter<void> = new EventEmitter<void>();
   public displayedColumns: string[] = DISPLAYED_COLUMNS;
   private destroy$: Subject<void> = new Subject<void>();
