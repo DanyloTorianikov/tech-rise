@@ -15,8 +15,7 @@ export class UserListComponent {
   constructor(private userService: UserService) { }
 
 
-  updateList() {
-    console.log('2121212121')
+  public updateList(): void {
     this.users$ = this.userService.getAllUsers();
   }
 }

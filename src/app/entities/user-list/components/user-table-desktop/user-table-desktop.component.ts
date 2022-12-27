@@ -44,7 +44,12 @@ export class UserTableDesktopComponent implements OnDestroy {
   }
 
   public openBanUserPopup(id: number, isBanned: boolean) {
-    this.dialog.open(BanUserPopupComponent, { data: { id, isBanned } });
+    this.dialog.open(BanUserPopupComponent, { data: { id, isBanned } }).afterClosed().pipe(
+      filter((isChanged: boolean) => isChanged),
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      this.onUpdateList.emit();
+    });
   }
 
   public ngOnDestroy(): void {

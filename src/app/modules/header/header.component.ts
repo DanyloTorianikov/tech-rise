@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IUser } from '@interfaces/user.interface';
 import { AuthService } from '@services/auth.service';
@@ -22,13 +22,15 @@ export class HeaderComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private userService: UserService,
-		private authService: AuthService
+		private authService: AuthService,
+		private cdr: ChangeDetectorRef
 	) { }
 
 	public ngOnInit(): void {
 		this.userService.currentUser$.subscribe((user: IUser | null) => {
 			this.user = user;
 			this.userIsAdmin = this.user?.roles?.includes('ADMIN')!;
+			this.cdr.markForCheck();
 		})
 	}
 	public toggleMobileMenu(): void {

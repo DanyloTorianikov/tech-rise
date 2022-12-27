@@ -1,0 +1,47 @@
+@import 'mixins';
+
+::ng-deep {
+  .ban-user-popup {
+    .mat-mdc-dialog-surface {
+      overflow-y: hidden;
+    }
+  }
+}
+
+:host {
+  padding: 20px;
+
+  .header {
+    @include flex;
+    padding: 0 20px;
+    color: var(--dark-gray);
+    font-size: 20px;
+
+    span {
+      margin-left: auto;
+    }
+
+    mat-icon {
+      margin-left: auto;
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+    }
+  }
+
+  .description {
+    padding: 20px 20px 0;
+    font-size: 18px;
+    color: var(--dark-gray);
+  }
+
+  app-input {
+    padding: 20px 20px 0;
+    display: block;
+  }
+
+  .actions {
+    @include flex($justify: space-between);
+    padding: 20px;
+  }
+}
