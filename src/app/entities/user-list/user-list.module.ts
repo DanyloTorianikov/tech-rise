@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BanUserPopupComponent } from './popups/ban-user-popup/ban-user-popup.component';
+import { FormElementsModule } from '@modules/form-elements/form-elements.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BanUserPopupComponent } from './popups/ban-user-popup/ban-user-popup.co
     MatTableModule,
     MatDialogModule,
     MatCheckboxModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormElementsModule
   ]
 })
 export class UserListModule { }

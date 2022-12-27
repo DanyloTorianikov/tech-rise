@@ -37,8 +37,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.loginForm.getRawValue()).pipe(
       takeUntil(this.destroy$)
-    ).subscribe((result) => {
-      console.log(result);
+    ).subscribe(() => {
       this.router.navigate(['profile']);
     })
   }

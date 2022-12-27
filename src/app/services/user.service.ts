@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ICountry } from '../interfaces/country.interface';
-import { IFullUserInfo, IUser } from '../interfaces/user.interface';
+import { IBanUser, IFullUserInfo, IUser } from '../interfaces/user.interface';
 import { base64ToFile, isBase64 } from '../utils/base64.util';
 
 @Injectable({
@@ -39,6 +39,10 @@ export class UserService {
     return this.http.get<IFullUserInfo[]>(`${this.apiUrl}users`);
   }
 
+  public banUser(banUser: IBanUser): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}users/ban`, banUser);
+  }
+
   public updateUser(user: IUser): Observable<IUser> {
     const formData = new FormData();
     Object.entries(user).forEach(([key, value]) => {
@@ -71,7 +75,6 @@ export class UserService {
     if (!isBase64(value)) return;
 
     const image = value ? base64ToFile(value) : '';
-    console.log(image)
     formData.append(key, image);
   }
 }
