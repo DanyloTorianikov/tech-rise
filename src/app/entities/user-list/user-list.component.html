@@ -6,7 +6,8 @@
       [users]="(users$ | async)!">
     </app-user-table-desktop>
     <ng-template #mobileTable>
-      <app-user-table-mobile></app-user-table-mobile>
+      <app-user-table-mobile [currentUser]="currentUser$ | async" (onUpdateList)="updateList()"
+      [users]="(users$ | async)!"></app-user-table-mobile>
     </ng-template>
   </div>
 </div>

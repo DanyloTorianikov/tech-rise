@@ -12,6 +12,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BanUserPopupComponent } from './popups/ban-user-popup/ban-user-popup.component';
 import { FormElementsModule } from '@modules/form-elements/form-elements.module';
+import { UserListService } from './services/user-list.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { FormElementsModule } from '@modules/form-elements/form-elements.module'
     MatCheckboxModule,
     ReactiveFormsModule,
     FormElementsModule
-  ]
+  ],
+  providers: [UserListService]
 })
 export class UserListModule { }

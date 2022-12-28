@@ -1,11 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { IRole } from '@entities/user-list/interfaces/role.interface';
-import { BanUserPopupComponent } from '@entities/user-list/popups/ban-user-popup/ban-user-popup.component';
-import { ChangeRolePopupComponent } from '@entities/user-list/popups/change-role-popup/change-role-popup.component';
-import { RoleService } from '@entities/user-list/services/role.service';
+import { UserListService } from '@entities/user-list/services/user-list.service';
 import { IFullUserInfo, IUser } from '@interfaces/user.interface';
-import { filter, Subject, switchMap, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { DISPLAYED_COLUMNS } from '../constants/user-table.constant';
 
 @Component({
@@ -22,31 +18,19 @@ export class UserTableDesktopComponent implements OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
-    private roleService: RoleService,
-    private dialog: MatDialog
+    private userListService: UserListService
   ) { }
 
   public openChangeRolePopup(id: number, userRoles: string[]): void {
-    this.roleService.getAllRole().pipe(
-      switchMap((rolesList: IRole[]) => {
-        return this.dialog.open(ChangeRolePopupComponent, {
-          data: {
-            id,
-            rolesList,
-            userRoles
-          }
-        }).afterClosed()
-      }),
-      filter((isAdded: boolean) => isAdded),
+    this.userListService.openChangeRolePopup(id, userRoles).pipe(
       takeUntil(this.destroy$)
     ).subscribe(() => {
-      this.onUpdateList.emit()
+      this.onUpdateList.emit();
     });
   }
 
-  public openBanUserPopup(id: number, isBanned: boolean) {
-    this.dialog.open(BanUserPopupComponent, { data: { id, isBanned } }).afterClosed().pipe(
-      filter((isChanged: boolean) => isChanged),
+  public openBanUserPopup(id: number, isBanned: boolean): void {
+    this.userListService.openBanUserPopup(id, isBanned).pipe(
       takeUntil(this.destroy$)
     ).subscribe(() => {
       this.onUpdateList.emit();

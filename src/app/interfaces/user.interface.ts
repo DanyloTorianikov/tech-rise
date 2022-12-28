@@ -18,6 +18,7 @@ export interface ILoginUser {
 export interface IFullUserInfo extends IUser {
   banReason: boolean;
   banned: boolean;
+  id: number;
 }
 
 export interface IBanUser {
