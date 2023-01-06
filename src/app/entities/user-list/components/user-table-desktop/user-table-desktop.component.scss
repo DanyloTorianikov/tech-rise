@@ -26,6 +26,14 @@
     }
   }
 
+  .sort-header {
+    @include flex($justify: flex-start);
+
+    mat-icon {
+      margin-left: 5px;
+    }
+  }
+
   .col-xxl {
     @media (max-width: $mediaWidthXXL) {
       display: none;

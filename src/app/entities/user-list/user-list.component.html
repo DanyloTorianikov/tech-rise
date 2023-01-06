@@ -2,12 +2,20 @@
 
 <div class="container">
   <div class="wrapper">
-    <app-user-table-desktop *ngIf="isTablet | async; else mobileTable" [currentUser]="currentUser$ | async" (onUpdateList)="updateList()"
-      [users]="(users$ | async)!">
-    </app-user-table-desktop>
-    <ng-template #mobileTable>
-      <app-user-table-mobile [currentUser]="currentUser$ | async" (onUpdateList)="updateList()"
-      [users]="(users$ | async)!"></app-user-table-mobile>
-    </ng-template>
+    <app-input placeholder="Search" [icon]="'search'" [formControl]="search"></app-input>
+    <ng-container *ngIf="(users$ | async) as users">
+
+      <app-user-table-desktop *ngIf="isTablet | async; else mobileTable" (onChangePage)="changePage($event)"
+        [paginationConfig]="{ id: paginationConfig.id, totalItems: users.total, itemsPerPage: users.itemsPerPage, currentPage: users.currentPage }"
+        [currentUser]="currentUser$ | async" (onUpdateList)="updateList()" (onSort)="sort($event, users.order)"
+        [users]="users.data">
+      </app-user-table-desktop>
+      <ng-template #mobileTable>
+        <app-user-table-mobile [currentUser]="currentUser$ | async" (onUpdateList)="updateList()"
+          [paginationConfig]="{ id: paginationConfig.id, totalItems: users.total, itemsPerPage: users.itemsPerPage, currentPage: users.currentPage }"
+          (onChangePage)="changePage($event)" [users]="users.data"></app-user-table-mobile>
+      </ng-template>
+    </ng-container>
+
   </div>
 </div>

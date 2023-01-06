@@ -9,16 +9,18 @@ export class ShowForAdminDirective implements OnChanges {
   @Input() public onlyForSuperAdmin: boolean = false;
   @Input() public notShowForAdmin: boolean = false;
 
-  constructor(private element: ElementRef) { }
+  constructor(
+    private element: ElementRef,
+  ) { }
 
   public ngOnChanges(): void {
     const userIsAdmin = this.user?.roles?.some((role: string) => (!this.onlyForSuperAdmin && role === 'ADMIN') || role === 'SUPER_ADMIN');
     if (!userIsAdmin && !this.notShowForAdmin) {
       this.element.nativeElement.style.display = 'none';
-    }
-
-    if (userIsAdmin && this.notShowForAdmin) {
+    } else if (userIsAdmin && this.notShowForAdmin) {
       this.element.nativeElement.style.display = 'none';
+    } else {
+      this.element.nativeElement.style.display = 'inline-block';
     }
   }
 }

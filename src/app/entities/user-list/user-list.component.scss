@@ -2,4 +2,13 @@
 
 .container {
   @include formContainer;
+
+  .wrapper {
+    flex-direction: column;
+    gap: 0;
+
+    app-input {
+      width: 100%;
+    }
+  }
 }
