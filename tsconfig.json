@@ -10,7 +10,8 @@
       "@interfaces/*": ["src/app/interfaces/*"],
       "@constants/*": ["src/app/constants/*"],
       "@entities/*": ["src/app/entities/*"],
-      "@enums/*": ["src/app/enums/*"]
+      "@enums/*": ["src/app/enums/*"],
+      "@utils/*": ["src/app/utils/*"],
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

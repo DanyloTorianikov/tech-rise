@@ -1,4 +1,4 @@
-import { TABLE_PAGINATION } from "@entities/user-list/constants/pagination.constant";
+import { TABLE_PAGINATION } from "@constants/pagination.constant";
 import { EOrder } from "@enums/order.enum";
 import { IPaginationParams } from "@interfaces/pagination.interface";
 import { EUserListSort } from "../enums/user-list-sort.enum";

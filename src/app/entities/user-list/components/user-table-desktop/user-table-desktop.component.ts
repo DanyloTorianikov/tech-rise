@@ -1,18 +1,20 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { UserListService } from '@entities/user-list/services/user-list.service';
-import { IFullUserInfo, IUser } from '@interfaces/user.interface';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Self } from '@angular/core';
+import { takeUntil } from 'rxjs';
 import { PaginationInstance } from 'ngx-pagination';
-import { Subject, takeUntil } from 'rxjs';
-import { DISPLAYED_COLUMNS } from '../constants/user-table.constant';
-import { EUserListSort } from '../enums/user-list-sort.enum';
+import { IFullUserInfo, IUser } from '@interfaces/user.interface';
+import { UnsubscribeService } from '@services/unsubscribe.service';
+import { DISPLAYED_COLUMNS } from '../../constants/user-table.constant';
+import { EUserListSort } from '../../enums/user-list-sort.enum';
+import { UserListService } from '../../services/user-list.service';
 
 @Component({
   selector: 'app-user-table-desktop',
   templateUrl: './user-table-desktop.component.html',
   styleUrls: ['./user-table-desktop.component.scss'],
+  providers: [UnsubscribeService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserTableDesktopComponent implements OnDestroy {
+export class UserTableDesktopComponent {
   @Input() public users!: IFullUserInfo[];
   @Input() public currentUser!: IUser | null;
   @Input() public paginationConfig!: PaginationInstance;
@@ -22,11 +24,10 @@ export class UserTableDesktopComponent implements OnDestroy {
 
   public displayedColumns: string[] = DISPLAYED_COLUMNS;
   public userListSort: typeof EUserListSort = EUserListSort;
-  private destroy$: Subject<void> = new Subject<void>();
-
 
   constructor(
-    private userListService: UserListService
+    private userListService: UserListService,
+    @Self() private destroy$: UnsubscribeService
   ) { }
 
   public openChangeRolePopup(id: number, userRoles: string[]): void {
@@ -51,10 +52,5 @@ export class UserTableDesktopComponent implements OnDestroy {
 
   public loadPage(page: number): void {
     this.onChangePage.emit(page);
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

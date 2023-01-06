@@ -1,18 +1,7 @@
-import { Injectable, Injector } from '@angular/core';
-import {
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest
-} from '@angular/common/http';
-import {
-  Observable,
-  throwError
-} from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Observable, throwError, catchError } from 'rxjs';
 import { AlertService } from '@services/alert.service';
-
 
 @Injectable({
   providedIn: 'root'

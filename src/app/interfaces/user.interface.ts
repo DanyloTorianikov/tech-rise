@@ -20,9 +20,3 @@ export interface IFullUserInfo extends IUser {
   banned: boolean;
   id: number;
 }
-
-export interface IBanUser {
-  userId: number;
-  banReason: boolean;
-  banned: boolean;
-}

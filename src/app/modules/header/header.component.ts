@@ -1,15 +1,17 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Self } from '@angular/core';
 import { Router } from '@angular/router';
-import { IUser } from '@interfaces/user.interface';
-import { AuthService } from '@services/auth.service';
-import { UserService } from '@services/user.service';
+import { takeUntil } from 'rxjs';
 import { EButtonColor, EButtonSize } from '@shared/button/enums/button.enum';
-import { BehaviorSubject } from 'rxjs';
+import { AuthService } from '@services/auth.service';
+import { UnsubscribeService } from '@services/unsubscribe.service';
+import { UserService } from '@services/user.service';
+import { IUser } from '@interfaces/user.interface';
 
 @Component({
 	selector: 'app-header',
 	templateUrl: 'header.component.html',
 	styleUrls: ['header.component.scss'],
+	providers: [UnsubscribeService],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
@@ -23,11 +25,14 @@ export class HeaderComponent implements OnInit {
 		private router: Router,
 		private userService: UserService,
 		private authService: AuthService,
-		private cdr: ChangeDetectorRef
+		private cdr: ChangeDetectorRef,
+		@Self() private destroy$: UnsubscribeService
 	) { }
 
 	public ngOnInit(): void {
-		this.userService.currentUser$.subscribe((user: IUser | null) => {
+		this.userService.currentUser$.pipe(
+			takeUntil(this.destroy$)
+		).subscribe((user: IUser | null) => {
 			this.user = user;
 			this.userIsAdmin = this.user?.roles?.includes('ADMIN')!;
 			this.cdr.detectChanges();

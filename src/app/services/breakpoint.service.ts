@@ -1,8 +1,8 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
-import { BREAKPOINTS } from '@constants/breakpoints.constant';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { BREAKPOINTS } from '@constants/breakpoints.constant';
 
 @Injectable({
   providedIn: 'root'

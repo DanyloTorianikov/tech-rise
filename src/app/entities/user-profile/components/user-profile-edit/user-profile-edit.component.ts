@@ -1,24 +1,26 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Self } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 import { AlertService } from '@services/alert.service';
 import { UserService } from '@services/user.service';
-import { IUser } from 'src/app/interfaces/user.interface';
+import { UnsubscribeService } from '@services/unsubscribe.service';
+import { IUser } from '@interfaces/user.interface';
 
 @Component({
   selector: 'app-user-profile-edit',
   templateUrl: './user-profile-edit.component.html',
   styleUrls: ['./user-profile-edit.component.scss'],
+  providers: [UnsubscribeService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserProfileEditComponent implements OnInit, OnDestroy {
+export class UserProfileEditComponent implements OnInit {
   public user$: BehaviorSubject<IUser | null> = this.userService.currentUser$;
-  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private userService: UserService,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
+    @Self() private destroy$: UnsubscribeService
   ) { }
 
   public ngOnInit(): void {
@@ -34,10 +36,5 @@ export class UserProfileEditComponent implements OnInit, OnDestroy {
       this.alertService.onSuccess('Profile updated successfully');
       this.router.navigateByUrl('profile/view');
     });
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

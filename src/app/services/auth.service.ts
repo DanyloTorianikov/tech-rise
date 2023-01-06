@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { IAuthResponse } from '@interfaces/auth.interface';
 import { ILoginUser, IUser } from 'src/app/interfaces/user.interface';
 import { UserService } from './user.service';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { IAuthResponse } from '@interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root'

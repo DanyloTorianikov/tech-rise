@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ICountry } from '../interfaces/country.interface';
-import { IBanUser, IUser } from '../interfaces/user.interface';
-import { base64ToFile, isBase64 } from '../utils/base64.util';
+import { base64ToFile, isBase64 } from '@utils/base64.util';
+import { ICountry } from '@interfaces/country.interface';
+import { IUser } from '@interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -35,20 +35,17 @@ export class UserService {
     this.currentUser$.next(user);
   }
 
-  public banUser(banUser: IBanUser): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}users/ban`, banUser);
-  }
-
   public updateUser(user: IUser): Observable<IUser> {
     const formData = new FormData();
-    Object.entries(user).forEach(([key, value]) => {
+    Object.entries(user).forEach(([key, value]: string[]) => {
       if (key === 'codeCountry') return;
+      
       if (key === 'avatar') {
         this.addPhoto(key, value, formData);
       } else {
         formData.append(key, value);
       }
-    })
+    });
     return this.http.put<IUser>(`${this.apiUrl}users`, formData).pipe(
       tap((user: IUser) => {
         localStorage.setItem('user', JSON.stringify(user));
