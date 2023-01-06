@@ -1,30 +1,27 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { ChangeDetectionStrategy, Component, Self } from '@angular/core';
+import { Router } from '@angular/router';
+import { takeUntil } from 'rxjs';
 import { IBreadcrumb } from '@shared/title/interfaces/breadcrumb.interface';
 import { AuthService } from '@services/auth.service';
-import { IUser } from 'src/app/interfaces/user.interface';
+import { UnsubscribeService } from '@services/unsubscribe.service';
+import { IUser } from '@interfaces/user.interface';
 import { REGISTRATION_BREADCRUMBS } from './constants/registration.constant';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
+  providers: [UnsubscribeService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegistrationComponent implements OnDestroy {
+export class RegistrationComponent {
   public registrationBreadcrumbs: IBreadcrumb[] = REGISTRATION_BREADCRUMBS;
-  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private authService: AuthService,
     private router: Router,
+    @Self() private destroy$: UnsubscribeService
   ) { }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
   public save(user: IUser): void {
     this.authService.registration(user).pipe(

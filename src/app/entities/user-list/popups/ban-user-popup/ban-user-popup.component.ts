@@ -1,39 +1,35 @@
-import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, Self } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UserService } from '@services/user.service';
+import { takeUntil } from 'rxjs';
 import { EButtonColor } from '@shared/button/enums/button.enum';
-import { Subject, takeUntil } from 'rxjs';
+import { UnsubscribeService } from '@services/unsubscribe.service';
+import { UserListService } from '../../services/user-list.service';
 
 @Component({
   selector: 'app-ban-user-popup',
   templateUrl: './ban-user-popup.component.html',
   styleUrls: ['./ban-user-popup.component.scss'],
+  providers: [UnsubscribeService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BanUserPopupComponent implements OnInit, OnDestroy {
+export class BanUserPopupComponent implements OnInit {
   public btnColor: typeof EButtonColor = EButtonColor;
   public isShowOptionalField: boolean = false;
   public banForm!: FormGroup;
-  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
-    private userService: UserService,
+    private userListService: UserListService,
     private dialogRef: MatDialogRef<BanUserPopupComponent>,
     private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { id: number, isBanned: boolean }
-
+    @Inject(MAT_DIALOG_DATA) public data: { id: number, isBanned: boolean },
+    @Self() private destroy$: UnsubscribeService
   ) {
     dialogRef.addPanelClass('ban-user-popup');
   }
 
   public ngOnInit(): void {
     this.initForm();
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   public close(isChanged?: boolean): void {
@@ -47,7 +43,7 @@ export class BanUserPopupComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.userService.banUser(this.banForm.getRawValue()).pipe(
+    this.userListService.banUser(this.banForm.getRawValue()).pipe(
       takeUntil(this.destroy$)
     ).subscribe(() => {
       this.close(true);

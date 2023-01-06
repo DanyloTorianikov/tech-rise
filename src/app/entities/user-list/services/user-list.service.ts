@@ -1,13 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { IPaginationData, IPaginationParams } from '@interfaces/pagination.interface';
-import { IFullUserInfo } from '@interfaces/user.interface';
 import { filter, Observable, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { DEFAULT_PAGINATION_CONFIG } from '../components/constants/user-table.constant';
-import { EUserListSort } from '../components/enums/user-list-sort.enum';
+import { IPaginationData, IPaginationParams } from '@interfaces/pagination.interface';
+import { IFullUserInfo } from '@interfaces/user.interface';
+import { DEFAULT_PAGINATION_CONFIG } from '../constants/user-table.constant';
+import { EUserListSort } from '../enums/user-list-sort.enum';
 import { IRole } from '../interfaces/role.interface';
+import { IBanUser } from '../interfaces/ban.interface';
 import { BanUserPopupComponent } from '../popups/ban-user-popup/ban-user-popup.component';
 import { ChangeRolePopupComponent } from '../popups/change-role-popup/change-role-popup.component';
 import { RoleService } from './role.service';
@@ -42,6 +43,10 @@ export class UserListService {
     return this.dialog.open(BanUserPopupComponent, { data: { id, isBanned } }).afterClosed().pipe(
       filter((isChanged: boolean) => isChanged)
     );
+  }
+
+  public banUser(banUser: IBanUser): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}users/ban`, banUser);
   }
 
   public getAllUsers(userParams?: IPaginationParams<EUserListSort>): Observable<IPaginationData<IFullUserInfo>> {

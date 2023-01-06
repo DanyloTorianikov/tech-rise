@@ -8,10 +8,14 @@ import { ButtonComponent } from './button/button.component';
 import { TitleComponent } from './title/title.component';
 import { ShowForAdminDirective } from './directives/show-for-admin.directive';
 
+const COMPONENTS = [
+  ButtonComponent,
+  TitleComponent,
+];
+
 @NgModule({
   declarations: [
-    ButtonComponent,
-    TitleComponent,
+    ...COMPONENTS,
     ShowForAdminDirective
   ],
   imports: [
@@ -22,9 +26,8 @@ import { ShowForAdminDirective } from './directives/show-for-admin.directive';
     HttpClientModule,
   ],
   exports: [
-    ButtonComponent,
+    ...COMPONENTS,
     MatIconModule,
-    TitleComponent,
     ShowForAdminDirective
   ]
 })

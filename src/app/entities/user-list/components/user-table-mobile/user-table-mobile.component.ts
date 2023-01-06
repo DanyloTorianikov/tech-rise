@@ -1,28 +1,29 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { UserListService } from '@entities/user-list/services/user-list.service';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output, Self } from '@angular/core';
+import { takeUntil } from 'rxjs';
+import { PaginationInstance } from 'ngx-pagination';
+import { UnsubscribeService } from '@services/unsubscribe.service';
 import { IPaginationData } from '@interfaces/pagination.interface';
 import { IFullUserInfo, IUser } from '@interfaces/user.interface';
-import { PaginationInstance } from 'ngx-pagination';
-import { Subject, takeUntil } from 'rxjs';
+import { UserListService } from '../../services/user-list.service';
 
 @Component({
   selector: 'app-user-table-mobile',
   templateUrl: './user-table-mobile.component.html',
   styleUrls: ['./user-table-mobile.component.scss'],
+  providers: [UnsubscribeService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserTableMobileComponent implements OnDestroy {
+export class UserTableMobileComponent {
   @Input() public users!: IFullUserInfo[];
   @Input() public currentUser!: IUser | null;
   @Input() public paginationConfig!: PaginationInstance;
   @Output() public onUpdateList: EventEmitter<void> = new EventEmitter<void>();
   @Output() public onChangePage: EventEmitter<number> = new EventEmitter<number>();
 
-  private destroy$: Subject<void> = new Subject<void>();
-
   constructor(
     private userListService: UserListService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    @Self() private destroy$: UnsubscribeService
   ) { }
 
   public openChangeRolePopup(id: number, userRoles: string[]): void {
@@ -53,10 +54,5 @@ export class UserTableMobileComponent implements OnDestroy {
     ).subscribe(() => {
       this.onUpdateList.emit();
     });
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

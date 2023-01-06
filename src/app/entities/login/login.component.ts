@@ -1,29 +1,30 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Self } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
+import { takeUntil } from 'rxjs';
+import { EButtonColor, EButtonSize } from '@shared/button/enums/button.enum';
+import { AuthService } from '@services/auth.service';
+import { UnsubscribeService } from '@services/unsubscribe.service';
 import { EMAIL_PATTERN } from '@constants/email-pattern.constant';
 import { PASSWORD_PATTERN } from '@constants/password-pattern.constant';
-import { AuthService } from '@services/auth.service';
-import { UserService } from '@services/user.service';
-import { EButtonColor, EButtonSize } from '@shared/button/enums/button.enum';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  providers: [UnsubscribeService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
   public btnSize: EButtonSize = EButtonSize.big;
   public btnColor: EButtonColor = EButtonColor.blue;
-  private destroy$: Subject<void> = new Subject<void>;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    @Self() private destroy$: UnsubscribeService
   ) { }
 
   public ngOnInit(): void {

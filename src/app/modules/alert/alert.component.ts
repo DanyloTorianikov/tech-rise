@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Self } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { AlertService } from '@services/alert.service';
+import { UnsubscribeService } from '@services/unsubscribe.service';
 import { Alert } from './models/alert.model';
 import { MAX_ALERTS } from './constants/alert.constant';
 
@@ -10,6 +10,7 @@ import { MAX_ALERTS } from './constants/alert.constant';
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
+  providers: [UnsubscribeService],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('fade', [
@@ -23,14 +24,14 @@ import { MAX_ALERTS } from './constants/alert.constant';
     ])
   ]
 })
-export class AlertComponent implements OnInit, OnDestroy {
+export class AlertComponent implements OnInit {
   public maxNotification = MAX_ALERTS;
   public alerts: Array<Alert> = [];
-  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private alertService: AlertService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    @Self() private destroy$: UnsubscribeService
   ) { }
 
   public ngOnInit(): void {
@@ -45,13 +46,8 @@ export class AlertComponent implements OnInit, OnDestroy {
       });
   }
 
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
   public removeAlert(alert: Alert): void {
-    this.alerts = this.alerts.filter(item => item !== alert);
+    this.alerts = this.alerts.filter((item: Alert) => item !== alert);
     this.cdr.detectChanges();
   }
 }

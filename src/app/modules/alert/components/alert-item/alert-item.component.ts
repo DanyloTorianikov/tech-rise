@@ -1,5 +1,5 @@
 
-import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
 import { LIFE_TIME } from '@modules/alert/constants/alert.constant';
 import { EAlert } from '../../enums/alert.enum';
 import { Alert } from '../../models/alert.model';
