@@ -8,11 +8,13 @@ import { UserTableMobileComponent } from './components/user-table-mobile/user-ta
 import { UserTableDesktopComponent } from './components/user-table-desktop/user-table-desktop.component';
 import { ChangeRolePopupComponent } from './popups/change-role-popup/change-role-popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BanUserPopupComponent } from './popups/ban-user-popup/ban-user-popup.component';
 import { FormElementsModule } from '@modules/form-elements/form-elements.module';
 import { UserListService } from './services/user-list.service';
+import { PaginationModule } from '@modules/pagination/pagination.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { UserListService } from './services/user-list.service';
     MatDialogModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    FormElementsModule
+    FormElementsModule,
+    PaginationModule,
+    InfiniteScrollModule
   ],
   providers: [UserListService]
 })

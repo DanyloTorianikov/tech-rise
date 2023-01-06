@@ -24,6 +24,8 @@ const SVG_ICONS = [
   { name: 'lock', path: SVG_ICONS_PATH + 'lock.svg' },
   { name: 'ban', path: SVG_ICONS_PATH + 'ban.svg' },
   { name: 'switch-roles', path: SVG_ICONS_PATH + 'switch-roles.svg' },
+  { name: 'arrow-right', path: SVG_ICONS_PATH + 'arrow-right.svg' },
+  { name: 'sort', path: SVG_ICONS_PATH + 'sort.svg' },
 ];
 
 @Injectable()

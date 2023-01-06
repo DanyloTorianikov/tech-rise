@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ICountry } from '../interfaces/country.interface';
-import { IBanUser, IFullUserInfo, IUser } from '../interfaces/user.interface';
+import { IBanUser, IUser } from '../interfaces/user.interface';
 import { base64ToFile, isBase64 } from '../utils/base64.util';
 
 @Injectable({
@@ -33,10 +33,6 @@ export class UserService {
   public saveUser(user: IUser): void {
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUser$.next(user);
-  }
-
-  public getAllUsers(): Observable<IFullUserInfo[]> {
-    return this.http.get<IFullUserInfo[]>(`${this.apiUrl}users`);
   }
 
   public banUser(banUser: IBanUser): Observable<void> {

@@ -2,54 +2,56 @@
 @import 'media-variables';
 
 :host {
-  width: 100%;
-  @include flex($justify: flex-start);
-  flex-wrap: wrap;
-
-  .user {
-    @include flex($align: flex-start, $direction: column);
-    width: calc(50% - 10px);
-    margin: 5px;
+  .users {
+    width: 100%;
+    @include flex($justify: flex-start);
     flex-wrap: wrap;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 20px;
-    border: 1px solid var(--light-gray);
 
-    @media(max-width: $mediaWidthSM) {
-      width: 100%;
-    }
+    .user {
+      @include flex($align: flex-start, $direction: column);
+      width: calc(50% - 10px);
+      margin: 5px;
+      flex-wrap: wrap;
+      padding: 10px;
+      box-sizing: border-box;
+      border-radius: 20px;
+      border: 1px solid var(--light-gray);
 
-    .avatar {
-      @include userAvatar;
-      margin: 0 auto 10px;
-    }
-
-    .actions {
-      @include flex;
-      width: 100%;
-
-      mat-icon {
-        margin: 0 5px 10px;
-      }
-    }
-
-    .field {
-      @include flex;
-      width: 100%;
-      padding: 4px 0;
-      font-size: 14px;
-
-
-      .label {
-        font-weight: 500;
-        color: var(--dark-gray);
-        width: 40%;
+      @media(max-width: $mediaWidthSM) {
+        width: 100%;
       }
 
-      .value {
-        width: 60%;
-        word-break: break-all;
+      .avatar {
+        @include userAvatar;
+        margin: 0 auto 10px;
+      }
+
+      .actions {
+        @include flex;
+        width: 100%;
+
+        mat-icon {
+          margin: 0 5px 10px;
+        }
+      }
+
+      .field {
+        @include flex;
+        width: 100%;
+        padding: 4px 0;
+        font-size: 14px;
+
+
+        .label {
+          font-weight: 500;
+          color: var(--dark-gray);
+          width: 40%;
+        }
+
+        .value {
+          width: 60%;
+          word-break: break-all;
+        }
       }
     }
   }

@@ -1,7 +1,10 @@
-<table [dataSource]="users" mat-table>
+<table [dataSource]="users | paginate: paginationConfig" mat-table>
   <ng-container matColumnDef="id">
     <th *matHeaderCellDef mat-header-cell>
-      <span>ID</span>
+      <div class="sort-header">
+        <span>ID</span>
+        <mat-icon (click)="sort(userListSort.id)" svgIcon="sort"></mat-icon>
+      </div>
     </th>
     <td *matCellDef="let element" mat-cell>
       <span>{{ element.id }} </span>
@@ -24,7 +27,10 @@
 
   <ng-container matColumnDef="email">
     <th *matHeaderCellDef mat-header-cell>
-      <span>Email</span>
+      <div class="sort-header">
+        <span>Email</span>
+        <mat-icon (click)="sort(userListSort.email)" svgIcon="sort"></mat-icon>
+      </div>
     </th>
     <td *matCellDef="let element" mat-cell>
       <span>{{ element.email }}</span>
@@ -33,7 +39,10 @@
 
   <ng-container matColumnDef="userName">
     <th *matHeaderCellDef mat-header-cell>
-      <span>User Name</span>
+      <div class="sort-header">
+        <span>User Name</span>
+        <mat-icon (click)="sort(userListSort.userName)" svgIcon="sort"></mat-icon>
+      </div>
     </th>
     <td *matCellDef="let element" class="desktopLG-cell" mat-cell>
       <span>{{ element.userName }}</span>
@@ -110,3 +119,5 @@
   <tr *matRowDef="let row; columns: displayedColumns" mat-row>
   </tr>
 </table>
+
+<app-pagination (pageChange)="loadPage($event)" [config]="paginationConfig"></app-pagination>

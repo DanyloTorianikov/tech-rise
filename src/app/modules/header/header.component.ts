@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 		this.userService.currentUser$.subscribe((user: IUser | null) => {
 			this.user = user;
 			this.userIsAdmin = this.user?.roles?.includes('ADMIN')!;
-			this.cdr.markForCheck();
+			this.cdr.detectChanges();
 		})
 	}
 	public toggleMobileMenu(): void {
