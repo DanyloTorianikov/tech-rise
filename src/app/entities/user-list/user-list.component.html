@@ -1,8 +1,8 @@
-<app-title [title]="'User List'"></app-title>
+<app-title [title]="'pageTitle.userList'"></app-title>
 
 <div class="container">
   <div class="wrapper">
-    <app-input placeholder="Search" [icon]="'search'" [formControl]="search"></app-input>
+    <app-input placeholder="fields.search" [icon]="'search'" [formControl]="search"></app-input>
     <ng-container *ngIf="(users$ | async) as users">
 
       <app-user-table-desktop *ngIf="isTablet | async; else mobileTable" (onChangePage)="changePage($event)"

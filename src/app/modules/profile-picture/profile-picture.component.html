@@ -1,5 +1,5 @@
 <div class="picture-container">
-  <div class="title">Profile picture</div>
+  <div class="title">{{ "profilePicture.title" | translate }}</div>
   <div *ngIf="!profilePicture" class="empty-user">
     <mat-icon svgIcon="empty-user"></mat-icon>
   </div>
@@ -9,14 +9,14 @@
   </div>
 
   <button>
-    <label for="files">Upload Profile Picture</label>
+    <label for="files">{{ "profilePicture.uploadProfilePicture" | translate }}</label>
     <input (change)="selectPhoto($event)" id="files" type="file" [accept]="possibleFormats">
   </button>
 
   <div class="description">
-    <span>upload a new avatar. Large image will be resized automatically.</span>
-    <span>Maximum upload size is <span class="bold">{{maxFileSize}} MB</span></span>
+    <span>{{ "profilePicture.uploadNew" | translate }}</span>
+    <span>{{ "profilePicture.maximumUpload" | translate }}
+      <span class="bold">{{maxFileSize}} {{ "profilePicture.mb" | translate }}</span>
+    </span>
   </div>
 </div>
-
-

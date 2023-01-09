@@ -1,14 +1,14 @@
-<app-title [title]="'Login'"></app-title>
+<app-title [title]="'pageTitle.login'"></app-title>
 
 <div class="container">
   <div class="wrapper">
     <form [formGroup]="loginForm">
       <app-input [isError]="!!(loginForm.get('email')?.invalid && loginForm.get('email')?.dirty)"
-        formControlName="email" [isRequired]="true" [label]="'Email'"
+        formControlName="email" [isRequired]="true" [label]="'fields.email'"
         [placeholder]="'Eg: johndoe@gmail.com'"></app-input>
-      <app-input [isRequired]="true"
-        [type]="'password'" [isError]="!!(loginForm.get('password')?.invalid && loginForm.get('password')?.dirty)"
-        formControlName="password" [label]="'Password'" [placeholder]="'Password'"></app-input>
+      <app-input [isRequired]="true" [type]="'password'"
+        [isError]="!!(loginForm.get('password')?.invalid && loginForm.get('password')?.dirty)"
+        formControlName="password" [label]="'fields.password'" [placeholder]="'fields.password'"></app-input>
       <app-button (click)="login()" [isFullWidth]="true" [text]="'Login'" [btnColor]="btnColor" [btnSize]="btnSize">
       </app-button>
     </form>

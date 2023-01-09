@@ -8,31 +8,31 @@
       <img *ngIf="user.avatar" [src]="user.avatar" class="profile-picture" alt="user-avatar">
     </div>
     <div class="field">
-      <div class="label">ID:</div>
+      <div class="label">{{ "userList.table.id" | translate }}:</div>
       <div class="value">{{ user.id }}</div>
     </div>
     <div class="field">
-      <div class="label">Email:</div>
+      <div class="label">{{ "fields.email" | translate }}:</div>
       <div class="value">{{ user.email }}</div>
     </div>
     <div class="field">
-      <div class="label">User Name:</div>
+      <div class="label">{{ "fields.username" | translate }}:</div>
       <div class="value">{{ user.userName }}</div>
     </div>
     <div class="field">
-      <div class="label">Phone:</div>
+      <div class="label">{{ "fields.phone" | translate }}:</div>
       <div class="value">{{ user.codeCountry.value + ' ' + user.phone }}</div>
     </div>
     <div class="field">
-      <div class="label">Birthday:</div>
+      <div class="label">{{ "fields.birthday" | translate }}:</div>
       <div class="value">{{ user.birthday | date: 'dd/MM/YYYY' }}</div>
     </div>
     <div class="field">
-      <div class="label">Banned:</div>
+      <div class="label">{{ "userList.table.banned" | translate }}:</div>
       <div class="value">{{ user.banned }}</div>
     </div>
     <div class="field">
-      <div class="label">Ban Reason:</div>
+      <div class="label">{{ "userList.table.banReason" | translate }}:</div>
       <div class="value">{{ user.banReason }}</div>
     </div>
 

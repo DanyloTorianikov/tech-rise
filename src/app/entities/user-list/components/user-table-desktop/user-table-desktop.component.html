@@ -2,7 +2,7 @@
   <ng-container matColumnDef="id">
     <th *matHeaderCellDef mat-header-cell>
       <div class="sort-header">
-        <span>ID</span>
+        <span>{{ "userList.table.id" | translate }}</span>
         <mat-icon (click)="sort(userListSort.id)" svgIcon="sort"></mat-icon>
       </div>
     </th>
@@ -13,7 +13,7 @@
 
   <ng-container matColumnDef="avatar">
     <th *matHeaderCellDef mat-header-cell>
-      <span>Avatar</span>
+      <span>{{ "userList.table.avatar" | translate }}</span>
     </th>
     <td *matCellDef="let element" mat-cell>
       <div class="user">
@@ -28,7 +28,7 @@
   <ng-container matColumnDef="email">
     <th *matHeaderCellDef mat-header-cell>
       <div class="sort-header">
-        <span>Email</span>
+        <span>{{ "fields.email" | translate }}</span>
         <mat-icon (click)="sort(userListSort.email)" svgIcon="sort"></mat-icon>
       </div>
     </th>
@@ -40,7 +40,7 @@
   <ng-container matColumnDef="userName">
     <th *matHeaderCellDef mat-header-cell>
       <div class="sort-header">
-        <span>User Name</span>
+        <span>{{ "fields.username" | translate }}</span>
         <mat-icon (click)="sort(userListSort.userName)" svgIcon="sort"></mat-icon>
       </div>
     </th>
@@ -51,7 +51,7 @@
 
   <ng-container matColumnDef="birthday">
     <th class="col-xxl" *matHeaderCellDef mat-header-cell>
-      <span>Birthday</span>
+      <span>{{ "fields.birthday" | translate }}</span>
     </th>
     <td class="col-xxl" *matCellDef="let element" mat-cell>
       <span>{{ element.birthday | date: 'dd/MM/YYYY' }}</span>
@@ -60,7 +60,7 @@
 
   <ng-container matColumnDef="phone">
     <th class="col-xl" *matHeaderCellDef mat-header-cell>
-      <span>Phone</span>
+      <span>{{ "fields.phone" | translate }}</span>
     </th>
     <td class="col-xl" *matCellDef="let element" mat-cell>
       <span>{{ element.codeCountry.value + ' ' + element.phone }}</span>
@@ -69,7 +69,7 @@
 
   <ng-container matColumnDef="country">
     <th class="col-xxl" *matHeaderCellDef mat-header-cell>
-      <span>Country</span>
+      <span>{{ "fields.country" | translate }}</span>
     </th>
     <td class="col-xxl" *matCellDef="let element" mat-cell>
       <span>{{ element.country }}</span>
@@ -78,7 +78,7 @@
 
   <ng-container matColumnDef="roles">
     <th *matHeaderCellDef mat-header-cell>
-      <span>Roles</span>
+      <span>{{ "userList.table.roles" | translate }}</span>
     </th>
     <td class="col-role" *matCellDef="let element" mat-cell>
       <div *ngFor="let role of element.roles">{{ role }}</div>
@@ -87,7 +87,7 @@
 
   <ng-container matColumnDef="banned">
     <th *matHeaderCellDef mat-header-cell>
-      <span>Banned</span>
+      <span>{{ "userList.table.banned" | translate }}</span>
     </th>
     <td *matCellDef="let element" mat-cell>
       <span>{{ element.banned }}</span>
@@ -96,7 +96,7 @@
 
   <ng-container matColumnDef="banReason">
     <th class="col-xl" *matHeaderCellDef mat-header-cell>
-      <span>Ban Reason</span>
+      <span>{{ "userList.table.banReason" | translate }}</span>
     </th>
     <td class="col-xl" *matCellDef="let element" mat-cell>
       <span>{{ element.banReason || '--' }}</span>
@@ -105,7 +105,7 @@
 
   <ng-container matColumnDef="actions">
     <th *matHeaderCellDef mat-header-cell>
-      <span>Actions</span>
+      <span>{{ "userList.table.actions" | translate }}</span>
     </th>
     <td *matCellDef="let element" class="actions" mat-cell>
       <mat-icon appShowForAdmin [user]="element" [notShowForAdmin]="true" svgIcon="ban"
