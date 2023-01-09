@@ -1,18 +1,20 @@
 <div class="header">
-  <span>Ban User</span>
+  <span>{{ "userList.popups.banUser.title" | translate }}</span>
   <mat-icon svgIcon="close" (click)="close()"></mat-icon>
 </div>
 
 <div class="description">
-  <span *ngIf="!data.isBanned">Are you sure you want to ban the user?</span>
-  <span *ngIf="data.isBanned">Are you sure you want to unban the user?</span>
+  <span *ngIf="!data.isBanned">{{ "userList.popups.banUser.wantToBan" | translate }}</span>
+  <span *ngIf="data.isBanned">{{ "userList.popups.banUser.wantToUnban" | translate }}</span>
 </div>
 
 <ng-container [formGroup]="banForm">
-  <app-input *ngIf="!data.isBanned && isShowOptionalField" formControlName="banReason" [label]="'Ban Reason'"></app-input>
+  <app-input *ngIf="!data.isBanned && isShowOptionalField" formControlName="banReason"
+    [label]="'userList.table.banReason'">
+  </app-input>
 
   <div class="actions">
-    <app-button [text]="'Yes'" (click)="submit()" [btnColor]="btnColor.blue"></app-button>
-    <app-button [text]="'No'" [btnColor]="btnColor.lightGray"></app-button>
+    <app-button [text]="'buttons.yes'" (click)="submit()" [btnColor]="btnColor.blue"></app-button>
+    <app-button [text]="'buttons.no'" [btnColor]="btnColor.lightGray"></app-button>
   </div>
 </ng-container>

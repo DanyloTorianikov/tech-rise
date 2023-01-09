@@ -17,9 +17,9 @@
 
 <ng-template #menu>
   <div class="menu-link">
-    <span>About Us</span>
-    <span>Pricing</span>
-    <span appShowForAdmin [user]="user!" [routerLink]="['/user-list']">User List</span>
+    <span>{{ 'header.aboutUs' | translate }}</span>
+    <span>{{ 'header.pricing' | translate }}</span>
+    <span appShowForAdmin [user]="user!" [routerLink]="['/user-list']">{{ 'pageTitle.userList' | translate }}</span>
   </div>
 
   <div class="user-info" *ngIf="user; else loginBtn">
@@ -49,20 +49,22 @@
 
 <ng-template #navigateBtn>
   <button mat-menu-item [routerLink]="['/profile']">
-    Profile
+    {{ "pageTitle.profile" | translate }}
   </button>
   <button mat-menu-item [routerLink]="['/profile/edit']">
-    Edit profile
+    {{ "pageTitle.editProfile" | translate }}
   </button>
   <button mat-menu-item (click)="onLogout()">
-    Logout
+    {{ "header.logout" | translate }}
   </button>
 </ng-template>
 
 <ng-template #loginBtn>
   <div class="menu-button">
-    <app-button [text]="'Sign In'" [routerLink]="['/login']" [btnSize]="btnSize" [btnColor]="btnColor"></app-button>
-    <app-button [text]="'Registration'" [routerLink]="['/registration']" [btnSize]="btnSize" [btnColor]="btnColor">
+    <app-button [text]="'buttons.signIn'" [routerLink]="['/login']" [btnSize]="btnSize"
+      [btnColor]="btnColor"></app-button>
+    <app-button [text]="'buttons.registration'" [routerLink]="['/registration']" [btnSize]="btnSize"
+      [btnColor]="btnColor">
     </app-button>
   </div>
 </ng-template>

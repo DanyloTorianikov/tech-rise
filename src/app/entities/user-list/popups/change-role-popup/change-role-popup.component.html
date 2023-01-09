@@ -1,5 +1,5 @@
 <div class="header">
-  <span>Change Role</span>
+  <span>{{ "userList.popups.changeRole.title" | translate }}</span>
   <mat-icon svgIcon="close" (click)="close()"></mat-icon>
 </div>
 
@@ -11,5 +11,7 @@
 </div>
 
 <div class="actions">
-  <app-button (click)="update()" [disabledButton]="!rolesArray.value.length" [text]="'Update'" [btnColor]="btnColor"></app-button>
+  <app-button (click)="update()" [disabledButton]="!rolesArray.value.length" [text]="'buttons.update'"
+    [btnColor]="btnColor">
+  </app-button>
 </div>

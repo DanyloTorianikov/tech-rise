@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, Self } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, takeUntil } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 import { AlertService } from '@services/alert.service';
 import { UserService } from '@services/user.service';
 import { UnsubscribeService } from '@services/unsubscribe.service';
@@ -20,6 +21,7 @@ export class UserProfileEditComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private alertService: AlertService,
+    private translateService: TranslateService,
     @Self() private destroy$: UnsubscribeService
   ) { }
 
@@ -33,7 +35,7 @@ export class UserProfileEditComponent implements OnInit {
     this.userService.updateUser(user).pipe(
       takeUntil(this.destroy$)
     ).subscribe(() => {
-      this.alertService.onSuccess('Profile updated successfully');
+      this.alertService.onSuccess(this.translateService.instant('editProfile.successfullyUpdated'));
       this.router.navigateByUrl('profile/view');
     });
   }

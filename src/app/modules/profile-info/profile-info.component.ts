@@ -11,6 +11,7 @@ import { EMAIL_PATTERN } from '@constants/email-pattern.constant';
 import { PASSWORD_PATTERN } from '@constants/password-pattern.constant';
 import { ICountry } from '@interfaces/country.interface';
 import { IUser } from '@interfaces/user.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile-info',
@@ -36,6 +37,7 @@ export class ProfileInfoComponent implements OnInit {
     private userService: UserService,
     private cdr: ChangeDetectorRef,
     private alertService: AlertService,
+    private translateService: TranslateService,
     @Self() private destroy$: UnsubscribeService
   ) { }
 
@@ -55,7 +57,7 @@ export class ProfileInfoComponent implements OnInit {
   }
 
   public showError(): void {
-    this.alertService.onError('You cannot edit email or phone number. Please reach out to support team if you have any queries.');
+    this.alertService.onError(this.translateService.instant('editProfile.cannotEdit'));
   }
 
   public setUserPhoto(photo: string): void {

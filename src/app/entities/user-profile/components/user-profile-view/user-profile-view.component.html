@@ -1,4 +1,4 @@
-<app-title (onClick)="navigateToEdit()" [titleSize]="titleSize" [btnText]="'Edit Profile'" [btnIcon]="'edit'"></app-title>
+<app-title (onClick)="navigateToEdit()" [titleSize]="titleSize" [btnText]="'pageTitle.editProfile'" [btnIcon]="'edit'"></app-title>
 
 <div class="container" *ngIf="(user$ | async) as user">
   <div class="wrapper wrapper-photo">
@@ -11,14 +11,14 @@
     <ng-container *ngTemplateOutlet="userPhoto"></ng-container>
     </div>
     <div class="header">
-      Profile Info
+      {{ 'profileInfo.title' | translate }}
     </div>
     <div class="user-info">
-      <app-user-data [icon]="'empty-user-v2'" [label]="'Username'" [value]="user.userName"></app-user-data>
-      <app-user-data [icon]="'email'" [label]="'Email'" [value]="user.email"></app-user-data>
-      <app-user-data [icon]="'phone'" [label]="'Phone'" [value]="user.codeCountry.value + ' ' + user.phone"></app-user-data>
-      <app-user-data [icon]="'calendar'" [label]="'Birthdate'" [value]="(user.birthday | date: 'dd/MM/YYYY')!"></app-user-data>
-      <app-user-data [icon]="'location'" [label]="'Country'" [value]="user.country"></app-user-data>
+      <app-user-data [icon]="'empty-user-v2'" [label]="'fields.username'" [value]="user.userName"></app-user-data>
+      <app-user-data [icon]="'email'" [label]="'fields.email'" [value]="user.email"></app-user-data>
+      <app-user-data [icon]="'phone'" [label]="'fields.phone'" [value]="user.codeCountry.value + ' ' + user.phone"></app-user-data>
+      <app-user-data [icon]="'calendar'" [label]="'fields.birthday'" [value]="(user.birthday | date: 'dd/MM/YYYY')!"></app-user-data>
+      <app-user-data [icon]="'location'" [label]="'fields.country'" [value]="user.country"></app-user-data>
     </div>
   </div>
 
