@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { AVAILABLE_FORMATS } from '@constants/available-formats.constant';
 import { AlertService } from '@services/alert.service';
-import { AVAILABLE_FORMATS, AVAILABLE_SIZE_PHOTO } from './constants/profile-picture.constant';
+import { AVAILABLE_SIZE_PHOTO } from './constants/profile-picture.constant';
 
 @Component({
   selector: 'app-profile-picture',

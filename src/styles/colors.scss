@@ -2,6 +2,8 @@
   --white: #FFFFFF;
   --background-color: #F5F5F5;
   --red: #FF0000;
+  --red-90: #f83d3d;
+  --red-80: #f75c5c;
   --green: #1EB03E;
   --blue: #2A5392;
   --blue-90: #3364ac;
@@ -20,4 +22,5 @@
   --gray-90: #F3F4F4;
   --gray-80: #CACACA;
   --background-gradient: linear-gradient(93.31deg, #4269AA -10.99%, #28AAD6 129.09%);
+  --filter-red: invert(11%) sepia(91%) saturate(7500%) hue-rotate(3deg) brightness(100%) contrast(118%);
 }

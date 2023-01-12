@@ -4,5 +4,6 @@ export enum ETitleSize {
 }
 
 export enum ETitleBtnShowOnMedia {
-  lg = 'lg'
+  lg = 'lg',
+  always = 'always'
 }

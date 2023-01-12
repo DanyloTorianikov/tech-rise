@@ -1,0 +1,78 @@
+@import 'mixins';
+
+::ng-deep {
+  .add-product-popup {
+    max-width: 600px !important;
+    width: 100%;
+    padding: 20px;
+
+    .mat-mdc-dialog-surface {
+      overflow-y: hidden;
+    }
+  }
+}
+
+:host {
+
+  .header {
+    @include flex;
+    margin: 20px;
+    color: var(--dark-gray);
+    font-size: 20px;
+    box-sizing: border-box;
+
+    span {
+      margin-left: auto;
+    }
+
+    mat-icon {
+      margin-left: auto;
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+    }
+  }
+
+  form {
+    padding: 20px;
+
+    button {
+      @include defaultButton;
+      @include bigButton;
+      @include lightGrayButton;
+      padding: 0;
+      width: 208px;
+
+      input {
+        display: none;
+      }
+
+      label {
+        @include flex;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .file-name {
+      @include flex($justify: flex-start);
+      margin-top: 5px;
+      font-size: 14px;
+      
+      mat-icon {
+        cursor: pointer;
+        margin-left: 5px;
+        width: 14px;
+        height: 14px;
+        filter: var(--filter-red);
+      }
+    }
+  }
+
+  .actions {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 20px;
+  }
+}
