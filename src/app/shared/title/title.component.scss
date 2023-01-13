@@ -46,6 +46,13 @@
     }
   }
 
+  &.always {
+    app-button {
+      margin-left: auto;
+      display: block;
+    }
+  }
+
   .title {
     font-weight: 700;
     font-size: 24px;

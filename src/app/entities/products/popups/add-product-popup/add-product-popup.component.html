@@ -1,0 +1,28 @@
+<div class="header">
+  <span>{{ "products.popups.addProduct.title" | translate }}</span>
+  <mat-icon svgIcon="close" (click)="close()"></mat-icon>
+</div>
+
+<form [formGroup]="addProductForm">
+  <app-input formControlName="title" [label]="'fields.title'" [placeholder]="'fields.title'"></app-input>
+
+  <app-input formControlName="content" [label]="'fields.content'" [placeholder]="'fields.content'"></app-input>
+
+  <app-input formControlName="price" [label]="'fields.price'" [placeholder]="'fields.price'" [type]="'number'">
+  </app-input>
+
+  <button *ngIf="!fileName">
+    <label for="files">{{ "products.popups.addProduct.uploadImage" | translate }}</label>
+    <input (change)="selectPhoto($event)" id="files" type="file" [accept]="possibleFormats">
+  </button>
+  <div *ngIf="fileName" class="file-name">
+    <span>{{ fileName }}</span>
+    <mat-icon svgIcon="close" (click)="deletePhoto()"></mat-icon>
+  </div>
+</form>
+
+<div class="actions">
+  <app-button (click)="addProduct()" [disabledButton]="addProductForm.invalid" [isFullWidth]="true"
+    [btnColor]="btnColor" [text]="'buttons.addProduct'">
+  </app-button>
+</div>

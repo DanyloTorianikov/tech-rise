@@ -23,6 +23,25 @@ button {
     @include lightGrayButton;
   }
 
+  &.red {
+    background-color: var(--red);
+    color: var(--white);
+    -webkit-text-fill-color: var(--white);
+    border: none;
+
+    &:hover:not([disabled]) {
+      background-color: var(--red-90);
+    }
+
+    &:active:not([disabled]) {
+      background-color: var(--red-80);
+    }
+
+    &:disabled  {
+      background-color: var(--dark-gray-80);
+    }
+  }
+
   &.blue {
     background-color: var(--blue);
     color: var(--white);
@@ -39,7 +58,6 @@ button {
 
     &:disabled  {
       background-color: var(--dark-gray-80);
-
     }
   }
 

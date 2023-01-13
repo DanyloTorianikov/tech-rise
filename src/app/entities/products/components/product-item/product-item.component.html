@@ -1,0 +1,17 @@
+<div class="image-container">
+  <img [src]="product.image" />
+</div>
+<div class="title">{{ product.title }}</div>
+<div class="price">
+  <span class="label">{{ "products.price" | translate }}:</span>
+  <span>{{ product.price | currency : "₴" : "symbol" }}</span>
+</div>
+<div class="content">{{ product.content }}</div>
+
+<div class="actions">
+  <app-button appShowForAdmin [user]="currentUser" [text]="'buttons.edit'" (click)="editProduct()"></app-button>
+
+  <app-button appShowForAdmin [user]="currentUser" [text]="'buttons.delete'" [btnColor]="btnColor.red"
+    (click)="deleteProduct()">
+  </app-button>
+</div>

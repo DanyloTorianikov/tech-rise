@@ -13,5 +13,6 @@ export enum EButtonColor {
   darkGray = 'dark-gray',
   lightGray = 'light-gray',
   blue = 'blue',
-  lightBlue = 'light-blue'
+  lightBlue = 'light-blue',
+  red = 'red'
 }

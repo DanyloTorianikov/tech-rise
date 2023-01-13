@@ -19,7 +19,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() public placeholder!: string;
   @Input() public isError!: boolean;
   @Input() public errorMessage!: string;
-  @Input() public type: 'text' | 'password' = 'text';
+  @Input() public type: 'text' | 'password' | 'number' = 'text';
   @Input() public mask?: string;
   @Input() public disabled?: boolean;
   @Input() public label?: string;
@@ -31,7 +31,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   }
 
   public hide: boolean = true;
-  public _type!: 'text' | 'password'
+  public _type!: 'text' | 'password' | 'number';
 
   private _value!: string;
 

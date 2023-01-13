@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { base64ToFile } from '@utils/base64.util';
 import { IAuthResponse } from '@interfaces/auth.interface';
-import { ILoginUser, IUser } from 'src/app/interfaces/user.interface';
+import { ILoginUser, IUser } from '@interfaces/user.interface';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -21,7 +22,7 @@ export class AuthService {
     const formData = new FormData();
     Object.entries(user).forEach(([key, value]) => {
       if (key === 'avatar') {
-        const image = value ? this.base64ToFile(value) : '';
+        const image = value ? base64ToFile(value) : '';
         formData.append(key, image);
       } else if (key === 'codeCountry') {
         formData.append(`${key}[label]`, value.label);
@@ -44,19 +45,5 @@ export class AuthService {
 
   public logout(): void {
     this.userService.removeUser();
-  }
-
-  private base64ToFile(file: any): File {
-    let arr = file.split(','),
-      type = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]),
-      number = bstr.length,
-      u8arr = new Uint8Array(number);
-
-    while (number--) {
-      u8arr[number] = bstr.charCodeAt(number);
-    }
-
-    return new File([u8arr], `avatar.png`, { type });
   }
 }

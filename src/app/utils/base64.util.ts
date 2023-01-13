@@ -15,3 +15,15 @@ export function base64ToFile(file: any): File {
 export function isBase64(str: string): boolean {
   return str?.includes('data:image');
 }
+
+export function addPhoto(key: string, value: string, formData: FormData): void {
+  if (!value) {
+    formData.append(key, '');
+    return;
+  }
+
+  if (!isBase64(value)) return;
+
+  const image = value ? base64ToFile(value) : '';
+  formData.append(key, image);
+}

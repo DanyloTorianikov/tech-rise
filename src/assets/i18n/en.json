@@ -10,7 +10,10 @@
     "signIn": "Sign In",
     "registration": "Registration",
     "update": "Update",
-    "save": "Save"
+    "save": "Save",
+    "addProduct": "Add Product",
+    "edit": "Edit",
+    "delete": "Delete"
   },
   "pageTitle": {
     "userList": "User List",
@@ -18,7 +21,8 @@
     "editProfile": "Edit profile",
     "profileRegistration": "Profile Registration",
     "home": "Home",
-    "login": "Login"
+    "login": "Login",
+    "products": "Products"
   },
   "fields": {
     "username": "Username",
@@ -28,7 +32,10 @@
     "birthday": "Birth date",
     "country": "Country",
     "selectCountry": "Select country",
-    "search": "Search"
+    "search": "Search",
+    "title": "Title",
+    "content": "Content",
+    "price": "Price"
   },
   "profilePicture": {
     "title": "Profile picture",
@@ -61,6 +68,19 @@
       },
       "changeRole": {
         "title": "Change Role"
+      }
+    }
+  },
+  "products": {
+    "price": "Price",
+    "popups": {
+      "addProduct": {
+        "title": "Add Product",
+        "uploadImage": "Upload Image"
+      },
+      "deleteProduct": {
+        "title": "Delete Product",
+        "description": "Are you sure you want to delete the product?"
       }
     }
   }

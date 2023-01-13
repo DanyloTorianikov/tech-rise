@@ -1,0 +1,11 @@
+<app-title [title]="'pageTitle.products'" [currentUser]="currentUser!" [showBtnForAdmin]="true"
+  [btnShowOnMedia]="btnShowOnMedia" (onClick)="openAddProductPopup()" [btnText]="'buttons.addProduct'">
+</app-title>
+
+<div class="container">
+  <div class="wrapper">
+    <app-product-item [currentUser]="currentUser!" (updateList)="updateList()" *ngFor="let product of products$ | async"
+      [product]="product">
+    </app-product-item>
+  </div>
+</div>

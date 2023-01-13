@@ -30,6 +30,10 @@ const routes: Routes = [
     loadChildren: () => import('./entities/user-list/user-list.module').then(m => m.UserListModule),
     canActivate: [RoleGuard]
   },
+  {
+    path: 'products',
+    loadChildren: () => import('./entities/products/products.module').then(m => m.ProductsModule),
+  },
 ];
 
 @NgModule({

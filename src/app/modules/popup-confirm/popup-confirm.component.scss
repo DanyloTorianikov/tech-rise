@@ -1,7 +1,11 @@
 @import 'mixins';
 
 ::ng-deep {
-  .ban-user-popup {
+  .popup-confirm {
+    max-width: 400px !important;
+    width: 100%;
+    padding: 20px;
+
     .mat-mdc-dialog-surface {
       overflow-y: hidden;
     }
@@ -9,25 +13,23 @@
 }
 
 :host {
-  padding: 20px;
+  box-sizing: border-box;
 
   .header {
     @include popupHeader;
   }
 
   .description {
-    padding: 20px 20px 0;
+    @include flex;
+    width: 100;
+    text-align: center;
+    padding: 5px 20px;
     font-size: 18px;
-    color: var(--dark-gray);
-  }
-
-  app-input {
-    padding: 20px 20px 0;
-    display: block;
   }
 
   .actions {
     @include flex($justify: space-between);
-    padding: 20px;
+    padding: 10px 20px;
+    box-sizing: border-box;
   }
 }

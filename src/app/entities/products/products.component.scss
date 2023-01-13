@@ -1,0 +1,16 @@
+@import 'mixins';
+@import 'media-variables';
+
+.container {
+  @include formContainer;
+
+  .wrapper {
+    justify-content: space-evenly;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    @media (max-width: $mediaWidthLG) {
+      flex-direction: row;
+    }
+  }
+}
