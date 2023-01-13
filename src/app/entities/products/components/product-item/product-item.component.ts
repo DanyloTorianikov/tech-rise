@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Self } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { filter, takeUntil } from 'rxjs';
+import { filter, switchMap, takeUntil } from 'rxjs';
 import { IUser } from '@interfaces/user.interface';
 import { UnsubscribeService } from '@services/unsubscribe.service';
 import { EButtonColor } from '@shared/button/enums/button.enum';
+import { PopupConfirmComponent } from '@modules/popup-confirm/popup-confirm.component';
 import { AddProductPopupComponent } from '../../popups/add-product-popup/add-product-popup.component';
 import { IProduct } from '../../interfaces/products.interface';
 import { ProductsService } from '../../services/products.service';
+import { DELETE_PRODUCT_POPUP } from './constants/product-item.constant';
 
 @Component({
   selector: 'app-product-item',
@@ -30,7 +32,7 @@ export class ProductItemComponent {
 
   public editProduct(): void {
     this.dialog.open(AddProductPopupComponent, { data: { product: this.product } }).afterClosed().pipe(
-      filter((isChange: boolean) => isChange),
+      filter(Boolean),
       takeUntil(this.destroy$)
     ).subscribe(() => {
       this.updateList.emit();
@@ -38,8 +40,10 @@ export class ProductItemComponent {
   }
 
   public deleteProduct(): void {
-    this.productsService.deleteProduct(this.product.id).pipe(
+    this.dialog.open(PopupConfirmComponent, { data: DELETE_PRODUCT_POPUP }).afterClosed().pipe(
+      filter(Boolean),
+      switchMap(() => this.productsService.deleteProduct(this.product.id)),
       takeUntil(this.destroy$)
-    ).subscribe(() => this.updateList.emit());
+    ).subscribe(() => this.updateList.emit())
   }
 }

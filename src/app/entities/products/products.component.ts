@@ -40,7 +40,7 @@ export class ProductsComponent implements OnInit {
 
   public openAddProductPopup(): void {
     this.dialog.open(AddProductPopupComponent).afterClosed().pipe(
-      filter((isChange: boolean) => isChange),
+      filter(Boolean),
       takeUntil(this.destroy$)
     ).subscribe(() => {
       this.updateList();

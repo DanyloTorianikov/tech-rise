@@ -77,6 +77,10 @@
       "addProduct": {
         "title": "Add Product",
         "uploadImage": "Upload Image"
+      },
+      "deleteProduct": {
+        "title": "Delete Product",
+        "description": "Are you sure you want to delete the product?"
       }
     }
   }

@@ -118,3 +118,22 @@
     }
   }
 }
+
+@mixin popupHeader {
+  @include flex;
+  margin: 20px;
+  color: var(--dark-gray);
+  font-size: 20px;
+  box-sizing: border-box;
+
+  span {
+    margin-left: auto;
+  }
+
+  mat-icon {
+    margin-left: auto;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
+}

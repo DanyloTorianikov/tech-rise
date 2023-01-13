@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from '@shared/shared.module';
 import { FormElementsModule } from '@modules/form-elements/form-elements.module';
+import { PopupConfirmModule } from '@modules/popup-confirm/popup-confirm.module';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { AddProductPopupComponent } from './popups/add-product-popup/add-product-popup.component';
 import { ProductsComponent } from './products.component';
@@ -21,7 +22,8 @@ import { ProductsRoutingModule } from './products-routing.module';
     SharedModule,
     MatDialogModule,
     FormElementsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PopupConfirmModule
   ]
 })
 export class ProductsModule { }

@@ -1,0 +1,11 @@
+<div class="header">
+  <span class="title">{{ modalConfig.title | translate }}</span>
+  <mat-icon svgIcon="close" [mat-dialog-close]="false"></mat-icon>
+</div>
+
+<div class="description">{{ modalConfig.description | translate }}</div>
+
+<div class="actions">
+  <app-button [btnColor]="btnColor" [mat-dialog-close]="true" [text]="modalConfig.confirmBtn"></app-button>
+  <app-button [text]="modalConfig.cancelBtn" [mat-dialog-close]="false"></app-button>
+</div>

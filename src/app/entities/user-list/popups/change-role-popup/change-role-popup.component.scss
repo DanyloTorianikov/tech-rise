@@ -12,21 +12,7 @@
   padding: 20px;
 
   .header {
-    @include flex;
-    padding: 0 20px;
-    color: var(--dark-gray);
-    font-size: 20px;
-
-    span {
-      margin-left: auto;
-    }
-
-    mat-icon {
-      margin-left: auto;
-      width: 15px;
-      height: 15px;
-      cursor: pointer;
-    }
+    @include popupHeader;
   }
 
   .checkbox-group {
