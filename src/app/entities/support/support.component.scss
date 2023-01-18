@@ -1,0 +1,63 @@
+@import 'mixins';
+@import 'media-variables';
+
+.container {
+  @include formContainer;
+
+  .wrapper {
+    flex-direction: column;
+    gap: 10px;
+
+    app-input {
+      width: 100%;
+    }
+
+    .messages-container {
+      width: 100%;
+      @include flex($direction: column, $align: flex-start);
+      box-sizing: border-box;
+      border: 1px solid var(--light-gray-70);
+      border-radius: 10px;
+      padding: 20px;
+      gap: 10px;
+
+      .messages {
+        width: 100%;
+        padding: 10px;
+        max-height: 500px;
+        overflow-y: auto;
+
+        @media (max-width: $mediaWidthSM) {
+          height: 300px;
+        }
+
+        .message {
+          @include flex($justify: flex-start, $direction: column, $align: flex-start);
+          gap: 10px;
+          margin: 10px 0;
+          width: fit-content;
+          border-radius: 10px;
+          padding: 10px 20px;
+
+          &.sent-message {
+            background: var(--light-blue-70);
+          }
+
+          &.received-message {
+            background: var(--light-green);
+            margin-left: auto
+          }
+
+          .user {
+            @include userAvatar;
+            @include flex($justify: flex-start);
+            gap: 10px;
+            width: 100%;
+
+          }
+        }
+      }
+    }
+
+  }
+}

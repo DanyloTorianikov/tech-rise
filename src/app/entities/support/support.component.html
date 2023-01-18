@@ -1,0 +1,38 @@
+<app-title [title]="'pageTitle.support'"></app-title>
+
+<div class="container">
+  <div class="wrapper">
+    <div class="title">{{ "support.title" | translate }}</div>
+    <ng-container *ngIf="userIsSupport">
+      <ng-container *ngFor="let userMessages of messages | keyvalue; let index=index">
+        <ng-container
+          *ngTemplateOutlet="messagesTemp; context: { messages: userMessages.value, clientId: userMessages.key, index }"></ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="!userIsSupport">
+      <ng-container
+        *ngTemplateOutlet="messagesTemp; context: { messages: messages['messages'], index: 0 }"></ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #messagesTemp let-messages="messages" let-clientId="clientId" let-index="index">
+  <div class="messages-container" [formGroup]="messagesForm">
+    <div class="messages" #messages>
+      <div class="message" [ngClass]="(currentUser?.email === message.user?.email) ? 'sent-message' :'received-message'"
+        *ngFor="let message of messages">
+        <div class="user">
+          <div *ngIf="!message.user?.avatar" class="empty-user">
+            <mat-icon svgIcon="empty-user"></mat-icon>
+          </div>
+          <img *ngIf="message.user?.avatar" [src]="message.user.avatar" class="profile-picture" alt="user-avatar">
+          <span class="user-name">{{ message?.user?.userName || ("support.anonymous" | translate) }}</span>
+        </div>
+
+        <div class="text">{{ message.text }}</div>
+      </div>
+    </div>
+    <app-input [formControlName]="clientId || 'messages'" [placeholder]="'fields.message'"></app-input>
+    <app-button [text]="'buttons.send'" (click)="sendMessage(index, clientId)"></app-button>
+  </div>
+</ng-template>

@@ -12,3 +12,22 @@ body {
 	font-family: 'Nunito Sans', sans-serif !important;
   margin: 0;
 }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--light-gray-70) var(--light-gray-70);
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--light-gray-70);
+  border-radius: 24px;
+}

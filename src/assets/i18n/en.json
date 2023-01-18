@@ -13,7 +13,8 @@
     "save": "Save",
     "addProduct": "Add Product",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "send": "Send"
   },
   "pageTitle": {
     "userList": "User List",
@@ -22,7 +23,8 @@
     "profileRegistration": "Profile Registration",
     "home": "Home",
     "login": "Login",
-    "products": "Products"
+    "products": "Products",
+    "support": "Support"
   },
   "fields": {
     "username": "Username",
@@ -35,7 +37,8 @@
     "search": "Search",
     "title": "Title",
     "content": "Content",
-    "price": "Price"
+    "price": "Price",
+    "message": "Message"
   },
   "profilePicture": {
     "title": "Profile picture",
@@ -83,5 +86,9 @@
         "description": "Are you sure you want to delete the product?"
       }
     }
+  },
+  "support": {
+    "title": "Send message to support",
+    "anonymous": "Anonymous"
   }
 }
