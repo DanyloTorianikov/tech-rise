@@ -34,6 +34,10 @@ const routes: Routes = [
     path: 'products',
     loadChildren: () => import('./entities/products/products.module').then(m => m.ProductsModule),
   },
+  {
+    path: 'support',
+    loadChildren: () => import('./entities/support/support.module').then(m => m.SupportModule),
+  },
 ];
 
 @NgModule({

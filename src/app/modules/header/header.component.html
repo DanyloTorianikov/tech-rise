@@ -17,9 +17,9 @@
 
 <ng-template #menu>
   <div class="menu-link">
-    <span>{{ 'header.aboutUs' | translate }}</span>
-    <span [routerLink]="'/products'">{{ 'pageTitle.products' | translate }}</span>
-    <span appShowForAdmin [user]="user!" [routerLink]="['/user-list']">{{ 'pageTitle.userList' | translate }}</span>
+    <span [routerLink]="'/support'">{{ "pageTitle.support" | translate }}</span>
+    <span [routerLink]="'/products'">{{ "pageTitle.products" | translate }}</span>
+    <span appShowForAdmin [user]="user!" [routerLink]="['/user-list']">{{ "pageTitle.userList" | translate }}</span>
   </div>
 
   <div class="user-info" *ngIf="user; else loginBtn">

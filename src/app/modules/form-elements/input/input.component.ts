@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 const noop = () => { };
 
@@ -35,12 +35,16 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   private _value!: string;
 
-  public get value(): string {
-    return this._value;
-  }
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) { }
 
   public ngOnInit(): void {
     this._type = this.type;
+  }
+
+  public get value(): string {
+    return this._value;
   }
 
   public onHide(): void {
@@ -53,6 +57,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   public writeValue(value: string): void {
     this.value = value;
+    this.cdr.markForCheck();
   }
 
   public registerOnChange(fn: any): void {
