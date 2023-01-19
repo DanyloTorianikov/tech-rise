@@ -102,7 +102,6 @@ export class AddProductPopupComponent implements OnInit {
       const { id, ...product } = this.data.product
       this.addProductForm.setValue(product);
       this.fileName = product.image
-      console.log(this.data.product, this.addProductForm)
     }
   }
 

@@ -32,15 +32,11 @@ export class AuthService {
       }
     });
 
-    return this.httpClient.post<IAuthResponse>(`${this.apiUrl}auth/registration`, formData).pipe(
-      tap(({ token }: IAuthResponse) => localStorage.setItem('token', token)),
-    );
+    return this.httpClient.post<IAuthResponse>(`${this.apiUrl}auth/registration`, formData);
   }
 
   public login(user: ILoginUser): Observable<IAuthResponse> {
-    return this.httpClient.post<IAuthResponse>(`${this.apiUrl}auth/login`, user).pipe(
-      tap(({ token }: IAuthResponse) => localStorage.setItem('token', token)),
-    );
+    return this.httpClient.post<IAuthResponse>(`${this.apiUrl}auth/login`, user);
   }
 
   public logout(): void {

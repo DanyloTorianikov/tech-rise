@@ -54,7 +54,6 @@ export class UserService {
   }
 
   public removeUser(): void {
-    localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.currentUser$.next(null);
   }
