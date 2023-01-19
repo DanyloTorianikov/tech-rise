@@ -6,6 +6,9 @@ import { AuthService } from '@services/auth.service';
 import { UnsubscribeService } from '@services/unsubscribe.service';
 import { UserService } from '@services/user.service';
 import { IUser } from '@interfaces/user.interface';
+import { Store } from '@ngrx/store';
+import { IAuthStore } from '@entities/auth/store/auth.store';
+import { Logout } from '@entities/auth/store/actions/auth.actions';
 
 @Component({
 	selector: 'app-header',
@@ -26,6 +29,7 @@ export class HeaderComponent implements OnInit {
 		private userService: UserService,
 		private authService: AuthService,
 		private cdr: ChangeDetectorRef,
+		private store: Store<IAuthStore>,
 		@Self() private destroy$: UnsubscribeService
 	) { }
 
@@ -44,6 +48,7 @@ export class HeaderComponent implements OnInit {
 
 	public onLogout(): void {
 		this.authService.logout();
+		this.store.dispatch(new Logout());
 		this.router.navigateByUrl('/registration');
 	}
 }

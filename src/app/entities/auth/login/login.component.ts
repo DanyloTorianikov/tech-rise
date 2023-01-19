@@ -1,18 +1,16 @@
-import { ChangeDetectionStrategy, Component, OnInit, Self } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { takeUntil } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { EButtonColor, EButtonSize } from '@shared/button/enums/button.enum';
-import { AuthService } from '@services/auth.service';
-import { UnsubscribeService } from '@services/unsubscribe.service';
 import { EMAIL_PATTERN } from '@constants/email-pattern.constant';
 import { PASSWORD_PATTERN } from '@constants/password-pattern.constant';
+import { Login } from '../store/actions/auth.actions';
+import { IAuthStore } from '../store/auth.store';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [UnsubscribeService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
@@ -22,9 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private router: Router,
-    @Self() private destroy$: UnsubscribeService
+    private store: Store<IAuthStore>,
   ) { }
 
   public ngOnInit(): void {
@@ -36,11 +32,7 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.invalid) return;
 
-    this.authService.login(this.loginForm.getRawValue()).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.router.navigate(['profile']);
-    })
+    this.store.dispatch(new Login(this.loginForm.getRawValue()));
   }
 
   private markAllAsDirty(): void {

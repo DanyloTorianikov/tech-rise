@@ -12,6 +12,8 @@
       "@entities/*": ["src/app/entities/*"],
       "@enums/*": ["src/app/enums/*"],
       "@utils/*": ["src/app/utils/*"],
+      "@root-store/*": ["src/app/root-store/*"],
+
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

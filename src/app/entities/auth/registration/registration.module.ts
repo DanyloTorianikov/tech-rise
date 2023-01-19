@@ -23,7 +23,7 @@ import { RegistrationRoutingModule } from './registration-routing.module';
     ReactiveFormsModule,
     MatDialogModule,
     LoaderModule,
-    ProfileInfoModule
+    ProfileInfoModule,
   ]
 })
 export class RegistrationModule { }
