@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, Self, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { switchMap, takeUntil, timer } from 'rxjs';
 import { IUser } from '@interfaces/user.interface';
+import { IAppStore } from '@root-store/reducers/root.reducers';
+import { currentUser } from '@entities/user-profile/store/selectors/user.selector';
 import { UnsubscribeService } from '@services/unsubscribe.service';
-import { UserService } from '@services/user.service';
 import { IMessage, IMessageFull, IMessages } from './interfaces/message.interface';
 import { SupportService } from './services/support.service';
 
@@ -23,7 +25,7 @@ export class SupportComponent implements OnInit {
   constructor(
     private supportService: SupportService,
     private cdr: ChangeDetectorRef,
-    private userService: UserService,
+    private store: Store<IAppStore>,
     private fb: FormBuilder,
     @Self() private destroy$: UnsubscribeService
   ) { }
@@ -62,7 +64,7 @@ export class SupportComponent implements OnInit {
   }
 
   private getMessages(): void {
-    this.userService.currentUser$.pipe(
+    this.store.select(currentUser).pipe(
       switchMap((user: IUser | null) => {
         this.currentUser = user;
         !this.userIsSupport && this.addControl('messages');

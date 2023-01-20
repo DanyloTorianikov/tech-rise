@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Self } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { filter, Observable, takeUntil } from 'rxjs';
 import { IUser } from '@interfaces/user.interface';
-import { UserService } from '@services/user.service';
+import { IAppStore } from '@root-store/reducers/root.reducers';
+import { currentUser } from '@entities/user-profile/store/selectors/user.selector';
 import { UnsubscribeService } from '@services/unsubscribe.service';
 import { ETitleBtnShowOnMedia } from '@shared/title/enums/title.enum';
 import { IProduct } from './interfaces/products.interface';
@@ -25,7 +27,7 @@ export class ProductsComponent implements OnInit {
     private productsService: ProductsService,
     private dialog: MatDialog,
     private cdr: ChangeDetectorRef,
-    private userService: UserService,
+    private store: Store<IAppStore>,
     @Self() private destroy$: UnsubscribeService,
   ) { }
 
@@ -48,7 +50,7 @@ export class ProductsComponent implements OnInit {
   }
 
   private getCurrentUser(): void {
-    this.userService.currentUser$.pipe(
+    this.store.select(currentUser).pipe(
       takeUntil(this.destroy$)
     ).subscribe((user: IUser | null) => this.currentUser = user);
   }

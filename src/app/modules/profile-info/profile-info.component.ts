@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, Self } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, Self, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { map, Observable, startWith, takeUntil } from 'rxjs';
 import { ISelect } from '@modules/form-elements/select/interfaces/select.interface';
@@ -20,7 +20,7 @@ import { TranslateService } from '@ngx-translate/core';
   providers: [UnsubscribeService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileInfoComponent implements OnInit {
+export class ProfileInfoComponent implements OnInit, OnChanges {
   @Output() public onSave: EventEmitter<IUser> = new EventEmitter<IUser>();
   @Input() public title!: string;
   @Input() public user?: IUser;
@@ -40,6 +40,10 @@ export class ProfileInfoComponent implements OnInit {
     private translateService: TranslateService,
     @Self() private destroy$: UnsubscribeService
   ) { }
+
+  public ngOnChanges(): void {
+    this.setValue()
+  }
 
   public ngOnInit(): void {
     this.initForm();
@@ -105,9 +109,13 @@ export class ProfileInfoComponent implements OnInit {
       avatar: ['']
     });
 
+    this.setValue()
+  }
+
+  private setValue(): void {
     if (this.user) {
-      this.userForm.removeControl('password');
-      this.userForm.patchValue(this.user);
+      this.userForm?.removeControl('password');
+      this.userForm?.patchValue(this.user);
     }
   }
 }

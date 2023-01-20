@@ -15,6 +15,7 @@ import { META_REDUCER } from './root-store/reducers/sync.reducers';
 import { InterceptorModule } from './interceptors/interceptor.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { UserEffects } from '@entities/user-profile/store/effects/user.effects';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { AppComponent } from './app.component';
     AlertModule,
     InterceptorModule,
     StoreModule.forRoot(reducers, { metaReducers: META_REDUCER }),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, UserEffects]),
     StoreDevtoolsModule.instrument({
       name: 'TechRise App',
       logOnly: environment.production

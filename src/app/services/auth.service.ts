@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IAppStore } from '@root-store/reducers/root.reducers';
+import { Logout } from '@entities/auth/store/actions/auth.actions';
+import { DeleteCurrentUser } from '@entities/user-profile/store/actions/user.actions';
 import { base64ToFile } from '@utils/base64.util';
 import { IAuthResponse } from '@interfaces/auth.interface';
 import { ILoginUser, IUser } from '@interfaces/user.interface';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +17,8 @@ export class AuthService {
   private apiUrl: string = environment.apiUrl;
 
   constructor(
-    private userService: UserService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private store: Store<IAppStore>
   ) { }
 
   public registration(user: IUser): Observable<IAuthResponse> {
@@ -40,6 +43,7 @@ export class AuthService {
   }
 
   public logout(): void {
-    this.userService.removeUser();
+    this.store.dispatch(new Logout());
+		this.store.dispatch(new DeleteCurrentUser());
   }
 }

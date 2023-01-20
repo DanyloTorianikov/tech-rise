@@ -14,7 +14,7 @@ export const authReducer = (authState = INITIAL_AUTH_STORE, action: AuthActions)
         token: ''
       };
     default:
-      return INITIAL_AUTH_STORE;
+      return { ...authState };
   }
 }
 

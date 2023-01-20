@@ -4,7 +4,7 @@ export interface IUser extends ILoginUser {
   userName: string;
   codeCountry: ISelect;
   phone: string;
-  birthday: Date;
+  birthday: Date | null;
   country: string;
   avatar: string;
   roles?: string[]

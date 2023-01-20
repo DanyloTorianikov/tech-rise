@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit, Self } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, EMPTY, Observable, switchMap, takeUntil } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { EMPTY, Observable, switchMap, takeUntil } from 'rxjs';
 import { PaginationInstance } from 'ngx-pagination';
+import { IAppStore } from '@root-store/reducers/root.reducers';
+import { currentUser } from '@entities/user-profile/store/selectors/user.selector';
 import { BreakpointService } from '@services/breakpoint.service';
 import { UnsubscribeService } from '@services/unsubscribe.service';
-import { UserService } from '@services/user.service';
 import { EOrder } from '@enums/order.enum';
 import { TABLE_PAGINATION } from '@constants/pagination.constant';
 import { IPaginationData } from '@interfaces/pagination.interface';
@@ -22,14 +24,14 @@ import { UserListService } from './services/user-list.service';
 export class UserListComponent implements OnInit {
   public isTablet: Observable<boolean> = this.breakpointService.isTablet();
   public users$: Observable<IPaginationData<IFullUserInfo>> = this.userListService.getAllUsers();
-  public currentUser$: BehaviorSubject<IUser | null> = this.userService.currentUser$;
+  public currentUser$: Observable<IUser | null> = this.store.select(currentUser);
   public paginationConfig: PaginationInstance = TABLE_PAGINATION;
   public search: FormControl = new FormControl('');
 
   constructor(
-    private userService: UserService,
     private userListService: UserListService,
     private breakpointService: BreakpointService,
+    private store: Store<IAppStore>,
     @Self() private destroy$: UnsubscribeService
   ) { }
 

@@ -7,15 +7,17 @@ const INIT_ACTION = '@ngrx/store/init';
 const UPDATE_ACTION = '@ngrx/store/update-reducers';
 
 const mergeReducer = (state: IAppStore, rehydratedState: IAppStore, action: { type: string }) => {
+
   if ((action.type === INIT_ACTION || action.type === UPDATE_ACTION) && rehydratedState) {
     state = merge(state, rehydratedState);
   }
+
   return state;
 };
 
 function localStorageSyncReducer(reducer: ActionReducer<IAppStore>): ActionReducer<IAppStore> {
   return localStorageSync({
-    keys: ['auth'],
+    keys: ['auth', 'user'],
     rehydrate: true,
     mergeReducer
   })(reducer);

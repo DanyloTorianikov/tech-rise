@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Self } from '@angular/core';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
+import { select, Store } from '@ngrx/store';
 import { EButtonColor, EButtonSize } from '@shared/button/enums/button.enum';
-import { AuthService } from '@services/auth.service';
 import { UnsubscribeService } from '@services/unsubscribe.service';
-import { UserService } from '@services/user.service';
+import { AuthService } from '@services/auth.service';
 import { IUser } from '@interfaces/user.interface';
-import { Store } from '@ngrx/store';
-import { IAuthStore } from '@entities/auth/store/auth.store';
-import { Logout } from '@entities/auth/store/actions/auth.actions';
+import { currentUser } from '@entities/user-profile/store/selectors/user.selector';
+import { IAppStore } from '@root-store/reducers/root.reducers';
 
 @Component({
 	selector: 'app-header',
@@ -19,28 +18,27 @@ import { Logout } from '@entities/auth/store/actions/auth.actions';
 })
 export class HeaderComponent implements OnInit {
 	public user!: IUser | null;
-	public userIsAdmin!: boolean;
 	public isShowMobileMenu: boolean = false;
 	public btnSize: EButtonSize = EButtonSize.medium;
 	public btnColor: EButtonColor = EButtonColor.darkGray;
 
 	constructor(
 		private router: Router,
-		private userService: UserService,
 		private authService: AuthService,
 		private cdr: ChangeDetectorRef,
-		private store: Store<IAuthStore>,
+		private store: Store<IAppStore>,
 		@Self() private destroy$: UnsubscribeService
 	) { }
 
 	public ngOnInit(): void {
-		this.userService.currentUser$.pipe(
+		this.store.pipe(
+			select(currentUser),
 			takeUntil(this.destroy$)
 		).subscribe((user: IUser | null) => {
 			this.user = user;
-			this.userIsAdmin = this.user?.roles?.includes('ADMIN')!;
 			this.cdr.detectChanges();
 		})
+
 	}
 	public toggleMobileMenu(): void {
 		this.isShowMobileMenu = !this.isShowMobileMenu;
@@ -48,7 +46,6 @@ export class HeaderComponent implements OnInit {
 
 	public onLogout(): void {
 		this.authService.logout();
-		this.store.dispatch(new Logout());
 		this.router.navigateByUrl('/registration');
 	}
 }
