@@ -1,17 +1,16 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit, Self } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { takeUntil } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { IAppStore } from '@root-store/reducers/root.reducers';
+import { UpdateUserRole } from '@entities/user-list/store/actions/user-list.actions';
 import { EButtonColor } from '@shared/button/enums/button.enum';
-import { UnsubscribeService } from '@services/unsubscribe.service';
 import { IRole } from '../../interfaces/role.interface';
-import { RoleService } from '../../services/role.service';
 
 @Component({
   selector: 'app-change-role-popup',
   templateUrl: './change-role-popup.component.html',
   styleUrls: ['./change-role-popup.component.scss'],
-  providers: [UnsubscribeService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChangeRolePopupComponent implements OnInit {
@@ -21,9 +20,8 @@ export class ChangeRolePopupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<ChangeRolePopupComponent>,
-    private roleService: RoleService,
+    private store: Store<IAppStore>,
     @Inject(MAT_DIALOG_DATA) public data: { rolesList: IRole[], id: number, userRoles: string[] },
-    @Self() private destroy$: UnsubscribeService
   ) {
     dialogRef.addPanelClass('change-role-popup')
   }
@@ -49,11 +47,8 @@ export class ChangeRolePopupComponent implements OnInit {
   }
 
   public update(): void {
-    this.roleService.updateRole(this.roleGroup.getRawValue()).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.close(true);
-    });
+    this.store.dispatch(new UpdateUserRole(this.roleGroup.getRawValue()));
+    this.close(true);
   }
 
   private initGroup(): void {

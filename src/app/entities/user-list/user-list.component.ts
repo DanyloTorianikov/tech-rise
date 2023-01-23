@@ -11,6 +11,8 @@ import { EOrder } from '@enums/order.enum';
 import { TABLE_PAGINATION } from '@constants/pagination.constant';
 import { IPaginationData } from '@interfaces/pagination.interface';
 import { IFullUserInfo, IUser } from '@interfaces/user.interface';
+import { GetAllRoles, GetUserList } from './store/actions/user-list.actions';
+import { userList } from './store/selectors/user-list.selector';
 import { EUserListSort } from './enums/user-list-sort.enum';
 import { UserListService } from './services/user-list.service';
 
@@ -23,7 +25,7 @@ import { UserListService } from './services/user-list.service';
 })
 export class UserListComponent implements OnInit {
   public isTablet: Observable<boolean> = this.breakpointService.isTablet();
-  public users$: Observable<IPaginationData<IFullUserInfo>> = this.userListService.getAllUsers();
+  public users$: Observable<IPaginationData<IFullUserInfo>> = this.store.select(userList);
   public currentUser$: Observable<IUser | null> = this.store.select(currentUser);
   public paginationConfig: PaginationInstance = TABLE_PAGINATION;
   public search: FormControl = new FormControl('');
@@ -36,9 +38,12 @@ export class UserListComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.store.dispatch(new GetUserList());
+    this.store.dispatch(new GetAllRoles());
+
     this.search.valueChanges.pipe(
       switchMap((search: string) => {
-        this.users$ = this.userListService.getAllUsers({ search });
+        this.store.dispatch(new GetUserList({ search }));
         return EMPTY;
       }),
       takeUntil(this.destroy$),
@@ -46,15 +51,16 @@ export class UserListComponent implements OnInit {
   };
 
   public updateList(): void {
-    this.users$ = this.userListService.getAllUsers();
+    this.store.dispatch(new GetUserList());
   }
 
-  public sort(sortBy: EUserListSort, orderParam: EOrder): void {
-    const order = orderParam === EOrder.DESC ? EOrder.ASC : EOrder.DESC;
-    this.users$ = this.userListService.getAllUsers({ sortBy, order });
+  public sort(sortBy: EUserListSort, order: EOrder): void {
+    this.store.dispatch(new GetUserList({ sortBy, order }));
+
   }
 
   public changePage(page: number): void {
-    this.users$ = this.userListService.getAllUsers({ page });
+    this.store.dispatch(new GetUserList({ page }));
+
   }
 }
