@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Self } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Self } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { filter, Observable, takeUntil } from 'rxjs';
@@ -7,9 +7,10 @@ import { IAppStore } from '@root-store/reducers/root.reducers';
 import { currentUser } from '@entities/user-profile/store/selectors/user.selector';
 import { UnsubscribeService } from '@services/unsubscribe.service';
 import { ETitleBtnShowOnMedia } from '@shared/title/enums/title.enum';
+import { GetProducts } from './store/actions/products.actions';
+import { products } from './store/selectors/products.selector';
 import { IProduct } from './interfaces/products.interface';
 import { AddProductPopupComponent } from './popups/add-product-popup/add-product-popup.component';
-import { ProductsService } from './services/products.service';
 
 @Component({
   selector: 'app-products',
@@ -19,34 +20,30 @@ import { ProductsService } from './services/products.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsComponent implements OnInit {
-  public products$: Observable<IProduct[]> = this.productsService.getAllProducts();
+  public products$: Observable<IProduct[]> = this.store.select(products);
   public currentUser!: IUser | null;
   public btnShowOnMedia: ETitleBtnShowOnMedia = ETitleBtnShowOnMedia.always;
 
   constructor(
-    private productsService: ProductsService,
     private dialog: MatDialog,
-    private cdr: ChangeDetectorRef,
     private store: Store<IAppStore>,
     @Self() private destroy$: UnsubscribeService,
   ) { }
 
   public ngOnInit(): void {
+    this.updateList();
     this.getCurrentUser();
   }
 
   public updateList(): void {
-    this.products$ = this.productsService.getAllProducts();
-    this.cdr.markForCheck();
+    this.store.dispatch(new GetProducts());
   }
 
   public openAddProductPopup(): void {
     this.dialog.open(AddProductPopupComponent).afterClosed().pipe(
       filter(Boolean),
       takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.updateList();
-    });
+    ).subscribe();
   }
 
   private getCurrentUser(): void {

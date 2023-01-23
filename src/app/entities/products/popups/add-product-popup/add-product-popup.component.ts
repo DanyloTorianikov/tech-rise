@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, Self } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { takeUntil, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { IAppStore } from '@root-store/reducers/root.reducers';
+import { AddProduct, EditProduct } from '@entities/products/store/actions/products.actions';
 import { EButtonColor } from '@shared/button/enums/button.enum';
 import { AVAILABLE_FORMATS } from '@constants/available-formats.constant';
 import { AlertService } from '@services/alert.service';
 import { UnsubscribeService } from '@services/unsubscribe.service';
-import { ProductsService } from '../../services/products.service';
 import { IProduct } from '../../interfaces/products.interface';
 
 @Component({
@@ -25,10 +26,9 @@ export class AddProductPopupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddProductPopupComponent>,
-    private productsService: ProductsService,
     private alertService: AlertService,
     private cdr: ChangeDetectorRef,
-    @Self() private destroy$: UnsubscribeService,
+    private store: Store<IAppStore>,
     @Inject(MAT_DIALOG_DATA) public data: { product: IProduct },
   ) {
     dialogRef.addPanelClass(['add-product-popup']);
@@ -45,17 +45,14 @@ export class AddProductPopupComponent implements OnInit {
 
   public addProduct(): void {
     const product = this.addProductForm.getRawValue();
+
     if (this.data) {
-      this.productsService.updateProduct(product, this.data.product.id).pipe(
-        tap(() => this.close(true)),
-        takeUntil(this.destroy$)
-      ).subscribe();
-      return
+      this.store.dispatch(new EditProduct({ product, productId: this.data.product.id }))
+    } else {
+      this.store.dispatch(new AddProduct(product));
     }
-    this.productsService.addProduct(product).pipe(
-      tap(() => this.close(true)),
-      takeUntil(this.destroy$)
-    ).subscribe();
+
+    this.close(true)
   }
 
   public selectPhoto(selectedPhoto: any): void {

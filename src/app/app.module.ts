@@ -12,6 +12,7 @@ import { AuthEffects } from '@entities/auth/store/effects/auth.effects';
 import { UserEffects } from '@entities/user-profile/store/effects/user.effects';
 import { UserListEffects } from '@entities/user-list/store/effects/user-list.effects';
 import { UserListService } from '@entities/user-list/services/user-list.service';
+import { ProductsEffects } from '@entities/products/store/effects/products.effects';
 import { AlertModule } from '@modules/alert/alert.module';
 import { HeaderModule } from '@modules/header/header.module';
 import { IconsRegistrarService } from '@services/icons-registrar.service';
@@ -35,7 +36,7 @@ import { AppComponent } from './app.component';
     MatDialogModule,
     InterceptorModule,
     StoreModule.forRoot(reducers, { metaReducers: META_REDUCER }),
-    EffectsModule.forRoot([AuthEffects, UserEffects, UserListEffects]),
+    EffectsModule.forRoot([AuthEffects, UserEffects, UserListEffects, ProductsEffects]),
     StoreDevtoolsModule.instrument({
       name: 'TechRise App',
       logOnly: environment.production
