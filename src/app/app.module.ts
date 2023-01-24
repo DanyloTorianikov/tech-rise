@@ -8,6 +8,7 @@ import { IconsRegistrarService } from '@services/icons-registrar.service';
 import { InterceptorModule } from './interceptors/interceptor.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AppComponent } from './app.component';
     HeaderModule,
     AlertModule,
     InterceptorModule,
+    IonicModule.forRoot(),
   ],
   providers: [
     IconsRegistrarService,

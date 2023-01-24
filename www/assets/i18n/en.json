@@ -1,0 +1,94 @@
+{
+  "header": {
+    "aboutUs": "About Us",
+    "pricing": "Pricing",
+    "logout": "Logout"
+  },
+  "buttons": {
+    "yes": "Yes",
+    "no": "No",
+    "signIn": "Sign In",
+    "registration": "Registration",
+    "update": "Update",
+    "save": "Save",
+    "addProduct": "Add Product",
+    "edit": "Edit",
+    "delete": "Delete",
+    "send": "Send"
+  },
+  "pageTitle": {
+    "userList": "User List",
+    "profile": "Profile",
+    "editProfile": "Edit profile",
+    "profileRegistration": "Profile Registration",
+    "home": "Home",
+    "login": "Login",
+    "products": "Products",
+    "support": "Support"
+  },
+  "fields": {
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "phone": "Phone",
+    "birthday": "Birth date",
+    "country": "Country",
+    "selectCountry": "Select country",
+    "search": "Search",
+    "title": "Title",
+    "content": "Content",
+    "price": "Price",
+    "message": "Message"
+  },
+  "profilePicture": {
+    "title": "Profile picture",
+    "uploadNew": "upload a new avatar. Large image will be resized automatically.",
+    "maximumUpload": "Maximum upload size is",
+    "mb": "MB",
+    "uploadProfilePicture": "Upload Profile Picture"
+  },
+  "profileInfo": {
+    "title": "Profile Info"
+  },
+  "editProfile": {
+    "successfullyUpdated": "Profile updated successfully",
+    "cannotEdit": "You cannot edit email or phone number. Please reach out to support team if you have any queries."
+  },
+  "userList": {
+    "table": {
+      "id": "ID",
+      "avatar": "Avatar",
+      "roles": "Roles",
+      "banned": "Banned",
+      "banReason": "Ban Reason",
+      "actions": "Actions"
+    },
+    "popups": {
+      "banUser": {
+        "title": "Ban User",
+        "wantToBan": "Are you sure you want to ban the user?",
+        "wantToUnban": "Are you sure you want to unban the user?"
+      },
+      "changeRole": {
+        "title": "Change Role"
+      }
+    }
+  },
+  "products": {
+    "price": "Price",
+    "popups": {
+      "addProduct": {
+        "title": "Add Product",
+        "uploadImage": "Upload Image"
+      },
+      "deleteProduct": {
+        "title": "Delete Product",
+        "description": "Are you sure you want to delete the product?"
+      }
+    }
+  },
+  "support": {
+    "title": "Send message to support",
+    "anonymous": "Anonymous"
+  }
+}

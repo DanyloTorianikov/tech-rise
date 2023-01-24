@@ -1,0 +1,12 @@
+{
+  "defaultProject": "tech-rise",
+  "projects": {
+    "tech-rise": {
+      "name": "tech-rise",
+      "integrations": {
+        "capacitor": {}
+      },
+      "type": "angular"
+    }
+  }
+}
