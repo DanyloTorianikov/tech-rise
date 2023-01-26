@@ -13,7 +13,7 @@ import { HeaderComponent } from './header.component';
     CommonModule,
     SharedModule,
     MatMenuModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [
     HeaderComponent

@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ButtonComponent } from './button/button.component';
 import { TitleComponent } from './title/title.component';
 import { ShowForAdminDirective } from './directives/show-for-admin.directive';
+import { IonicModule } from '@ionic/angular';
 
 const TRANSLATION_CONFIG = {
   loader: {
@@ -35,12 +36,14 @@ const COMPONENTS = [
     MatListModule,
     RouterModule,
     MatIconModule,
+    IonicModule,
     HttpClientModule,
     TranslateModule.forRoot(TRANSLATION_CONFIG),
   ],
   exports: [
     ...COMPONENTS,
     MatIconModule,
+    IonicModule,
     ShowForAdminDirective,
     TranslateModule,
   ]

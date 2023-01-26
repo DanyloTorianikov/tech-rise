@@ -1,7 +1,7 @@
 @import 'media-variables';
 @import 'mixins';
 
-:host {
+ion-grid {
   @include flex($justify: space-between);
   height: 70px;
   padding: 0 7%;
@@ -18,7 +18,6 @@
     mat-icon {
       width: 119px;
       height: 33px;
-      padding: 19px 0 17px 0;
     }
   }
 
@@ -30,7 +29,7 @@
   .menu-link {
     @include flex($justify: space-around);
 
-    span {
+    ion-label {
       cursor: pointer;
       padding: 10px;
       margin-right: 10px;
@@ -174,6 +173,11 @@
       @include flex($justify: flex-end);
       width: 100%;
       margin: 0 auto;
+
+      .item-inner {
+        justify-content: flex-end;
+        padding: 0;
+      }
 
       @media (min-width: calc($mediaWidthSM + 1px)) {
         display: none;
