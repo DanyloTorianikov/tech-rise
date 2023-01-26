@@ -154,30 +154,6 @@
             ],
             "scripts": []
           }
-        },
-        "ionic-cordova-serve": {
-          "builder": "@ionic/angular-toolkit:cordova-serve",
-          "options": {
-            "cordovaBuildTarget": "tech-rise:ionic-cordova-build",
-            "devServerTarget": "tech-rise:serve"
-          },
-          "configurations": {
-            "production": {
-              "cordovaBuildTarget": "tech-rise:ionic-cordova-build:production",
-              "devServerTarget": "tech-rise:serve:production"
-            }
-          }
-        },
-        "ionic-cordova-build": {
-          "builder": "@ionic/angular-toolkit:cordova-build",
-          "options": {
-            "browserTarget": "tech-rise:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "tech-rise:build:production"
-            }
-          }
         }
       }
     }

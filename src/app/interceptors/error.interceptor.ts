@@ -17,13 +17,14 @@ export class ErrorInterceptor implements HttpInterceptor {
   ) { }
 
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     return next.handle(request)
       .pipe(catchError(err => {
         if (err.status === 401) {
           this.authService.logout();
           this.router.navigate(['login']);
         }
-        this.alertService.onError(err.error.message);
+        this.alertService.onError(err?.error?.message);
         return throwError(err);
       }));
   }
