@@ -1,34 +1,36 @@
-<div class="header-logo">
-  <mat-icon svgIcon="logo"></mat-icon>
-</div>
+<ion-grid>
+  <ion-row class="header-logo">
+    <mat-icon svgIcon="logo"></mat-icon>
+  </ion-row>
 
-<div class="header-menu">
-  <ng-container *ngTemplateOutlet="menu"></ng-container>
-</div>
+  <ion-row class="header-menu">
+    <ng-container *ngTemplateOutlet="menu"></ng-container>
+  </ion-row>
 
-<div class="header-menu-mobile">
-  <mat-icon svgIcon="hamburger-menu" (click)="toggleMobileMenu()"></mat-icon>
-</div>
+  <ion-row class="header-menu-mobile">
+    <mat-icon svgIcon="hamburger-menu" (click)="toggleMobileMenu()"></mat-icon>
+  </ion-row>
 
-<div class="header-menu right-menu" *ngIf="isShowMobileMenu">
-  <mat-icon class="close-btn" svgIcon="close" *ngIf="isShowMobileMenu" (click)="toggleMobileMenu()"></mat-icon>
-  <ng-container *ngTemplateOutlet="menu"></ng-container>
-</div>
-
+  <ion-row class="header-menu right-menu" *ngIf="isShowMobileMenu">
+    <mat-icon class="close-btn" svgIcon="close" *ngIf="isShowMobileMenu" (click)="toggleMobileMenu()"></mat-icon>
+    <ng-container *ngTemplateOutlet="menu"></ng-container>
+  </ion-row>
+</ion-grid>
 <ng-template #menu>
-  <div class="menu-link">
-    <span [routerLink]="'/support'">{{ "pageTitle.support" | translate }}</span>
-    <span [routerLink]="'/products'">{{ "pageTitle.products" | translate }}</span>
-    <span appShowForAdmin [user]="user!" [routerLink]="['/user-list']">{{ "pageTitle.userList" | translate }}</span>
-  </div>
+  <ion-row class="menu-link">
+    <ion-label [routerLink]="'/support'">{{ "pageTitle.support" | translate }}</ion-label>
+    <ion-label [routerLink]="'/products'">{{ "pageTitle.products" | translate }}</ion-label>
+    <ion-label appShowForAdmin [user]="user!" [routerLink]="['/user-list']">{{ "pageTitle.userList" | translate
+      }}</ion-label>
+  </ion-row>
 
-  <div class="user-info" *ngIf="user; else loginBtn">
+  <ion-row class="user-info" *ngIf="user; else loginBtn">
     <div class="user">
       <div *ngIf="!user.avatar" class="empty-user">
         <mat-icon svgIcon="empty-user"></mat-icon>
       </div>
       <img *ngIf="user.avatar" [src]="user.avatar" class="profile-picture" alt="user-avatar">
-      <span class="user-name">{{ user.userName }}</span>
+      <ion-label class="user-name">{{ user.userName }}</ion-label>
       <mat-icon *ngIf="!isShowMobileMenu" class="menu-icon" svgIcon="arrow-down" [matMenuTriggerFor]="menu">
       </mat-icon>
     </div>
@@ -40,11 +42,11 @@
     <div class="navigate-btn" *ngIf="isShowMobileMenu">
       <ng-container *ngTemplateOutlet="navigateBtn"></ng-container>
     </div>
-  </div>
+  </ion-row>
 
-  <div class="header-search">
+  <ion-row class="header-search">
     <mat-icon svgIcon="search" class="search-icon"></mat-icon>
-  </div>
+  </ion-row>
 </ng-template>
 
 <ng-template #navigateBtn>
@@ -60,11 +62,11 @@
 </ng-template>
 
 <ng-template #loginBtn>
-  <div class="menu-button">
+  <ion-row class="menu-button">
     <app-button [text]="'buttons.signIn'" [routerLink]="['/login']" [btnSize]="btnSize"
       [btnColor]="btnColor"></app-button>
     <app-button [text]="'buttons.registration'" [routerLink]="['/registration']" [btnSize]="btnSize"
       [btnColor]="btnColor">
     </app-button>
-  </div>
+  </ion-row>
 </ng-template>

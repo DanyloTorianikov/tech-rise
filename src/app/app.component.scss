@@ -1,0 +1,9 @@
+:host {
+  ion-router-outlet {
+    margin-top: 70px;
+
+    ::ng-deep.ion-page {
+      justify-content: flex-start;
+    }
+  }
+}
